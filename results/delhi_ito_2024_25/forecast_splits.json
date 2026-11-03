@@ -1,0 +1,12 @@
+[
+  {
+    "station": "ITO Delhi CPCB",
+    "train_n": 404,
+    "valid_n": 133,
+    "test_n": 133,
+    "train_last": "2025-03-08 00:00:00+05:30",
+    "validation_first": "2025-03-11 00:00:00+05:30",
+    "validation_last": "2025-08-07 00:00:00+05:30",
+    "test_first": "2025-08-16 00:00:00+05:30"
+  }
+]

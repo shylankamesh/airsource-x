@@ -1,0 +1,24 @@
+[
+  {
+    "station": "ITO Delhi CPCB",
+    "file": "ito_delhi_2024_25.csv",
+    "sha256": "dfd2f715c38326a08ce096bd05d800e770ef041ed77978660c026d7dc1822df8",
+    "source_rows": 68985,
+    "bad_timestamps": 1,
+    "duplicate_timestamps": 0,
+    "input_cadence": "15-minute",
+    "timestamp_assumption": "Timestamp is IST unless explicit offset",
+    "first_hour_ist": "2024-01-01 05:00:00+05:30",
+    "last_hour_ist": "2026-01-01 05:00:00+05:30",
+    "total_hours": 17545,
+    "valid_pm25_hours": 16362,
+    "pm25_hour_coverage": 0.93257,
+    "max_missing_streak_hours": 148,
+    "optional_coverage": {
+      "pm10": 0.93474,
+      "no2": 0.96637,
+      "ws": 0.0,
+      "rh": 0.0
+    }
+  }
+]
