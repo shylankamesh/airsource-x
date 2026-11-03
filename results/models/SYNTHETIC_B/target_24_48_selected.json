@@ -1,0 +1,9 @@
+{
+  "method_chosen_by_validation": "Persistence",
+  "validation_mae": {
+    "LightGBM": 15.14803938939601,
+    "Persistence": 13.893848097812963,
+    "Seasonal": 27.362860160854183
+  },
+  "SELECTION_POLICY": "lowest validation MAE only; test data never consulted"
+}

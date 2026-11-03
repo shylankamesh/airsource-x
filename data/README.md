@@ -1,6 +1,6 @@
 # Data in this package
 
-`raw/ito_delhi_2024_25.csv` is the OpenCity-listed ITO, Delhi - CPCB 15-minute resource used in the retrospective forecast experiment. `ITO_DELHI_DATA_MANIFEST.md` records the source listing, provenance, checksum, license metadata, timestamp caveat, and coverage audit. The raw data file is included in the full hackathon bundle but omitted from GitHub; download it from the source listing below to reproduce.
+`raw/ito_delhi_2024_25.csv` is the OpenCity-listed ITO, Delhi - CPCB 15-minute resource used in the retrospective forecast experiment. `ITO_DELHI_DATA_MANIFEST.md` records the source listing, provenance, checksum, license metadata, timestamp caveat, and coverage audit. The raw data file is included in this repository and the full hackathon bundle. The source listing below is the original provider resource.
 
 The OpenCity resource metadata identifies its license as Public Domain. CPCB asks users to acknowledge contributing agencies in research and other publications; preserve that attribution.
 
@@ -15,3 +15,5 @@ python -m scripts.run --csv data/raw/ito_delhi_2024_25.csv --name "ITO Delhi CPC
 ```
 
 Check the generated `data_audit.json`, `forecast_splits.json`, and `EXPERIMENT_RESULTS.md` before citing metrics. Do not interpret the synthetic policy fixtures as atmospheric ground truth.
+
+

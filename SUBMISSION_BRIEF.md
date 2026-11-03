@@ -4,7 +4,7 @@
 
 - Team name: **[ADD TEAM NAME]**
 - Members: **[ADD MEMBER NAMES]**
-- Public repository: **[ADD VERIFIED PUBLIC URL]**
+- Public repository: **[https://github.com/shylankamesh/airsource-x](https://github.com/shylankamesh/airsource-x)**
 - Hosted demo: **[ADD URL IF DEPLOYED]**
 
 ## Short description
@@ -57,3 +57,4 @@ The nominal 90% intervals achieved 71.5% and 74.6% empirical coverage, so they m
 ## Pre-submission fields still required
 
 Fill the team, member, repository, and hosted demo fields above. Confirm the hackathon’s submission format and deadline. Check data reuse terms before redistributing the raw CSV. Deploy the site and test it in the target demo environment if a live URL is required. Select a project license before inviting reuse.
+

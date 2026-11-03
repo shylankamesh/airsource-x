@@ -1,0 +1,24 @@
+{
+  "station": "SYNTHETIC_B",
+  "horizon": "target_0_24",
+  "features": [
+    "pm_lag24_mean",
+    "pm_lag48_mean",
+    "pm_lag72_mean",
+    "pm_lag7d_mean",
+    "pm_lag24_std",
+    "pm_last_valid",
+    "month_sin",
+    "month_cos",
+    "dayofyear_sin",
+    "dayofyear_cos",
+    "weekday",
+    "pm10_lag24_mean",
+    "no2_lag24_mean",
+    "ws_lag24_mean",
+    "rh_lag24_mean"
+  ],
+  "train_last": "2024-09-13 00:00:00+05:30",
+  "test_first": "2024-12-10 00:00:00+05:30",
+  "data_label": "SYNTHETIC / NOT DELHI MEASUREMENTS"
+}

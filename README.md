@@ -9,14 +9,14 @@
 - Team name: **[ADD YOUR ACTUAL TEAM NAME]**
 - Member 1: **[ADD NAME]**
 - Member 2: **[ADD NAME]**
-- Submission: **[ADD PUBLIC GITHUB URL]**
+- Submission: **[https://github.com/shylankamesh/airsource-x](https://github.com/shylankamesh/airsource-x)**
 - Live demo: **[ADD IF DEPLOYED]**
 
 ## Delhi CPCB study and website
 
 A retrospective run is included in `results/delhi_ito_2024_25/`, using the OpenCity listing for ITO, Delhi - CPCB 15-minute observations. The source file contains 68,985 rows, spanning 1 January 2024 through 1 January 2026, with 93.257% hourly PM2.5 coverage after aggregation and a 148-hour maximum missing streak. The source includes one blank annual footer row, which is excluded when timestamps are parsed. Review `data_audit.json`, `forecast_splits.json`, and `EXPERIMENT_RESULTS.md` before citing any metric.
 
-The static responsive website is in `website/index.html`. Open it locally, or serve the project directory with any static web server. It presents the one-station retrospective result and makes its limits explicit. It does not claim live forecast validation, all-Delhi generalization, or source attribution. The full hackathon bundle includes the raw CSV at `data/raw/`; the GitHub repository excludes this large data file and provides the download link and checksum in `data/ITO_DELHI_DATA_MANIFEST.md`. OpenCity resource metadata lists the resource as Public Domain; retain CPCB contributor acknowledgement when redistributing or publishing.
+The static responsive website is in `website/index.html`. Open it locally, or serve the project directory with any static web server. It presents the one-station retrospective result and makes its limits explicit. It does not claim live forecast validation, all-Delhi generalization, or source attribution. The full hackathon bundle includes the raw CSV at `data/raw/`; this repository includes the raw CSV and provides its source link and checksum in `data/ITO_DELHI_DATA_MANIFEST.md`. OpenCity resource metadata lists the resource as Public Domain; retain CPCB contributor acknowledgement when redistributing or publishing.
 
 Current held-out results: for 0–24h, persistence MAE is 26.6446 µg/m³ and LightGBM MAE is 28.3714; for 24–48h, persistence is 38.9823 and LightGBM is 34.5325. Nominal 90% intervals cover 71.5% and 74.6% of the respective test cases. These are retrospective metrics from one station and should not be presented as live operational performance.
 
@@ -105,3 +105,6 @@ This is a **research screening prototype**, not a chemical source-apportionment 
 
 ## License
 No license chosen yet. All rights reserved until the team selects a license; third-party datasets have their own terms.
+
+
+

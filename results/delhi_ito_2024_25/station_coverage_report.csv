@@ -1,0 +1,2 @@
+station,file,sha256,source_rows,bad_timestamps,duplicate_timestamps,input_cadence,timestamp_assumption,first_hour_ist,last_hour_ist,total_hours,valid_pm25_hours,pm25_hour_coverage,max_missing_streak_hours,optional_coverage
+ITO Delhi CPCB,ito_delhi_2024_25.csv,dfd2f715c38326a08ce096bd05d800e770ef041ed77978660c026d7dc1822df8,68985,1,0,15-minute,Timestamp is IST unless explicit offset,2024-01-01 05:00:00+05:30,2026-01-01 05:00:00+05:30,17545,16362,0.93257,148,"{'pm10': 0.93474, 'no2': 0.96637, 'ws': 0.0, 'rh': 0.0}"

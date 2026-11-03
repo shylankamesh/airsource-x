@@ -1,0 +1,16 @@
+feature,importance_gain_or_splits
+dayofyear_cos,347
+pm_lag7d_mean,237
+pm_lag24_mean,112
+no2_lag24_mean,94
+pm_last_valid,94
+pm_lag24_std,90
+rh_lag24_mean,86
+pm_lag48_mean,82
+dayofyear_sin,81
+ws_lag24_mean,76
+pm_lag72_mean,58
+pm10_lag24_mean,47
+weekday,39
+month_cos,20
+month_sin,19
