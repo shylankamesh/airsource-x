@@ -1,7 +1,7 @@
 # AirSource X: Methodology and Reproducibility
 
 ## Data mode and scope
-The packaged experiment is a software-methodology pilot on **synthetic hourly observations** produced by `make_synthetic_fixture(seed=...)`. Data include artificial seasonality, periodic elevated PM2.5 episodes, correlated PM10, NO2 and weather-like variables. They are not Indian monitoring observations. For the real mode, supply actual station CSV with verified provenance. Ingested data are not necessarily regulatory-grade.
+The package contains two separate evaluation tracks: (1) a retrospective observational forecast run for ITO, Delhi - CPCB using the CSV and source manifest in `data/raw/`; and (2) deterministic synthetic fixtures used only to test evidence-rule software behavior. Synthetic evidence-policy metrics are not atmospheric accuracy. The Delhi observations are CPCB-derived but have not been independently audited for station publication/availability time semantics, so forecast skill is retrospective rather than validated as-issued operational accuracy.
 
 ## Quality and time
 CSV timestamps without timezone offsets are assumed Asia/Kolkata, NOT verified. Duplicates averaged after timestamp grouping; source-marked invalid values require provider-specific expansion. Negative pollution values become NA. Hourly PM2.5 from a 15-minute feed requires 3 of 4 valid rows. Missing labels are never filled: each 24h target requires 18 actual valid hours. Past features also require a minimum of 18 valid readings in the preceding 24 hours.
