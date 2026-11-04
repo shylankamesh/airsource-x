@@ -9,7 +9,7 @@
 - Team name: **Fresh_coderz**
 - Members: **Shylan Kamesh S**, **Sai Santhosh T**, **Derin Godson**
 - Submission: **[https://github.com/shylankamesh/airsource-x](https://github.com/shylankamesh/airsource-x)**
-- Live demo: **[ADD IF DEPLOYED]**
+- Live demo: **[AirSource X on GitHub Pages](https://shylankamesh.github.io/airsource-x/)**
 
 ## Technologies
 
@@ -48,7 +48,7 @@ AirSource X provides two **actual trained LightGBM forecasts** for one ITO Delhi
 ### Not implemented or empirically validated
 - Independent validation of the downloaded dataset's publication/availability time semantics and source reuse terms.
 - Replicated performance across additional Delhi stations and later independent seasons.
-- Publicly deployed demo; the new static site is a local artifact until hosted.
+- Public static website deployed at [shylankamesh.github.io/airsource-x](https://shylankamesh.github.io/airsource-x/); the interactive Gradio app remains local-only.
 - Real satellite fire ingestion, HYSPLIT trajectories, TROPOMI, MAIAC or actual source apportionment.
 - Source attribution truth labels, human usability study, trained causal source classifier or validated source percentages.
 - True live data deployment or regulatory AQI. Overall AQI cannot be derived from PM2.5 alone.
@@ -102,7 +102,7 @@ SHAP is optional and explains model predictions, not physical sources. To regene
 - [`docs/DEMO_GUIDE.md`](docs/DEMO_GUIDE.md): judges' walkthrough and honest wording.
 
 ## Screenshots / demo
-The responsive website is in `website/index.html`; the Gradio app defaults to the Delhi retrospective results while clearly marking evidence-engine scenarios as synthetic. The hero graphic is conceptual and labeled as not measured data. No verified public deployment is available yet. Browser inspection was performed locally; repository screenshots are still required before final submission. Do not claim the prototype has solved GP-01 empirically.
+The responsive website is in `website/index.html`; the Gradio app defaults to the Delhi retrospective results while clearly marking evidence-engine scenarios as synthetic. The hero graphic is conceptual and labeled as not measured data. The public static website is deployed and was opened successfully. The deployed `main` copy still has report links that resolve outside the project path; this submission branch has corrected relative links, which will ship after PR #1 is merged and Pages redeploys. Repository screenshots are still required before final submission. Do not claim the prototype has solved GP-01 empirically.
 
 ## AI development tool disclosure (required)
 This project code, documentation, and experimental prototype were generated with assistance from **ChatGPT (OpenAI)**. Human review and verification are required. Add any other tools actually used by the team (for example, GitHub Copilot or Cursor) before submission. AI assistance is not evidence that experiments ran; actual CLI outputs/tests are included.
