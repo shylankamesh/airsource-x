@@ -11,10 +11,10 @@ AirSource X is a Delhi-first environmental intelligence prototype for PM₂.₅ 
 | Field | Details |
 |---|---|
 | Track / problem | Track 2: Green Planet · GP-01 Air Quality Monitoring & Source Attribution |
-| Team name | **Fresh_coderz** |
+| Team name | **AirSource X** |
 | Team members | Shylan Kamesh S, Sai Santhosh T, Derin Godson |
 | Public source repository | [github.com/shylankamesh/airsource-x](https://github.com/shylankamesh/airsource-x) · Streamlit V8 source on `main` |
-| Live demo | [Open the public Cloud Run demo](https://airsource-x-605775397403.asia-south1.run.app/) · Forecast Lab preview verified |
+| Live demo | [Open the public Cloud Run demo](https://airsource-x-605775397403.asia-south1.run.app) · Forecast Lab preview verified |
 | Demo screenshots / GIF | [Forecast Lab live capture](assets/screenshots/cloud-run-forecast.jpg) |
 | Submission deadline | 4 November 2026, 8:00 PM IST |
 
