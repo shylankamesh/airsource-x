@@ -1,5 +1,0 @@
-data_label,station,horizon,nominal_coverage,empirical_coverage,mean_interval_width_ugm3,calibration_rows,test_rows,calibration_limitation
-SYNTHETIC / NOT DELHI MEASUREMENTS,SYNTHETIC_A,target_0_24,0.9,0.8214285714285714,98.82507145928204,83,84,"Temporal dependence: coverage is empirical, not guaranteed"
-SYNTHETIC / NOT DELHI MEASUREMENTS,SYNTHETIC_A,target_24_48,0.9,0.8452380952380952,118.24570693173949,83,84,"Temporal dependence: coverage is empirical, not guaranteed"
-SYNTHETIC / NOT DELHI MEASUREMENTS,SYNTHETIC_B,target_0_24,0.9,0.8333333333333334,83.1070776936818,83,84,"Temporal dependence: coverage is empirical, not guaranteed"
-SYNTHETIC / NOT DELHI MEASUREMENTS,SYNTHETIC_B,target_24_48,0.9,0.8690476190476191,113.14613273546581,83,84,"Temporal dependence: coverage is empirical, not guaranteed"

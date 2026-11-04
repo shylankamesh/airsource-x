@@ -1,5 +1,0 @@
-# Separate historical six-station benchmark
-
-`delhi_multisite_hourly.csv.gz` is the prepared hourly file from Sonawani and Patil (2021), **Delhi Multi-Site Air-Quality Data Set V1**, Mendeley Data, DOI [10.17632/bzhzr9b64v.1](https://doi.org/10.17632/bzhzr9b64v.1), licensed CC BY 4.0. Attribution: Sonawani, Shilpa; Patil, Kailas (2021), “Delhi Multi-Site Air-Quality Data Set,” Version 1, Mendeley Data. The supplied prepared table contains station-labelled observations for AshokVihar, DCStadium, DwarkaSec8, Najafgarh, NehruNagar, and Okhla, from June 2018 to October 2019.
-
-The file is gzip-compressed without changing its CSV records. The original prepared CSV SHA-256 from the supplied Main ZIP was `92cab112b34fe3daf41328c8750bbea38085e322d0347274c0ef15d7af1fbde0`; the compressed file checksum and source metadata are in [`manifest.json`](manifest.json). The data remain separate from the ITO CPCB-derived 2024–2026 experiment. No station coordinates are bundled or assumed. See [the integration audit](../../docs/INTEGRATION_AUDIT.md) for the Main ZIP model-manifest mismatch and model-artifact decision.

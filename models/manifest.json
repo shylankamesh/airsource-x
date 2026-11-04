@@ -1,0 +1,126 @@
+{
+  "project": "AirSource X",
+  "dataset": "Delhi Multi-Site Air-Quality Data Set V1",
+  "dataset_doi": "10.17632/bzhzr9b64v.1",
+  "dataset_license": "CC BY 4.0",
+  "dataset_sha256": "92cab112b34fe3daf41328c8750bbea38085e322d0347274c0ef15d7af1fbde0",
+  "runtime_versions": {
+    "python": "3.13.7",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.9.1",
+    "joblib": "1.6.0"
+  },
+  "training": "Per-station and per-horizon validation-selected model, refit on all rows with complete historical targets.",
+  "features": "Issue-time and trailing-history features from airsource.forecast.feature_frame.",
+  "warning": "Historical research artifacts trained on 2018-06 through 2019-10 data. Not current monitoring or a validated operational warning model.",
+  "artifacts": [
+    {
+      "file": "ashokvihar_target_0_24h.joblib",
+      "sha256": "4948e7d35537a0205f3401a0bc8e44efc00cb14003b0583082abe281f983f019",
+      "station": "AshokVihar",
+      "horizon": "target_0_24h",
+      "model": "LightGBM leaves=7",
+      "holdout_mae_ug_m3": 10.59162622845337,
+      "rows": 11705
+    },
+    {
+      "file": "ashokvihar_target_24_48h.joblib",
+      "sha256": "88895ec991e0bbe1c4be83826e65902ffa1a6c80494db041111baf74f21eaa6f",
+      "station": "AshokVihar",
+      "horizon": "target_24_48h",
+      "model": "HistGradientBoosting",
+      "holdout_mae_ug_m3": 16.456217138066823,
+      "rows": 11705
+    },
+    {
+      "file": "dcstadium_target_0_24h.joblib",
+      "sha256": "76cb67ea8f1a5852b6a61b50a9ce40f419f5e9ba1d655b7a5b617037a2e56889",
+      "station": "DCStadium",
+      "horizon": "target_0_24h",
+      "model": "LightGBM leaves=7",
+      "holdout_mae_ug_m3": 10.211267739795732,
+      "rows": 11704
+    },
+    {
+      "file": "dcstadium_target_24_48h.joblib",
+      "sha256": "f99d3177b1f01d1a70d74a501dfc65d95f81ba659d08cec9cb00d88253a855f7",
+      "station": "DCStadium",
+      "horizon": "target_24_48h",
+      "model": "LightGBM leaves=15",
+      "holdout_mae_ug_m3": 15.533649127534652,
+      "rows": 11704
+    },
+    {
+      "file": "dwarkasec8_target_0_24h.joblib",
+      "sha256": "e0c4595ec10c0366e07ddbc426859f8bd95c69061a0ba9684aca5b557968364b",
+      "station": "DwarkaSec8",
+      "horizon": "target_0_24h",
+      "model": "LightGBM leaves=7",
+      "holdout_mae_ug_m3": 12.548547627173814,
+      "rows": 11704
+    },
+    {
+      "file": "dwarkasec8_target_24_48h.joblib",
+      "sha256": "09656f817231bac334cd0185bd823c9f43f09ce377a28b1d0e19cbb70367e9b3",
+      "station": "DwarkaSec8",
+      "horizon": "target_24_48h",
+      "model": "LightGBM leaves=7",
+      "holdout_mae_ug_m3": 16.628112278334424,
+      "rows": 11704
+    },
+    {
+      "file": "najafgarh_target_0_24h.joblib",
+      "sha256": "4040c7b64e72341f334709f7ad9ad8673fe063e3fbf4521859f95e4d3f46a498",
+      "station": "Najafgarh",
+      "horizon": "target_0_24h",
+      "model": "LightGBM leaves=15",
+      "holdout_mae_ug_m3": 9.33145662248744,
+      "rows": 11704
+    },
+    {
+      "file": "najafgarh_target_24_48h.joblib",
+      "sha256": "ecbe3dd394e7913ca81c0d03272c95a14f8c8c5a838058c5691af98210e2a65f",
+      "station": "Najafgarh",
+      "horizon": "target_24_48h",
+      "model": "LightGBM leaves=31",
+      "holdout_mae_ug_m3": 13.063258125813336,
+      "rows": 11704
+    },
+    {
+      "file": "nehrunagar_target_0_24h.joblib",
+      "sha256": "4b4e2360fe54f3ccdc8be0ffed94d0815c0b6328bd08cac1dee3e7ed8b198294",
+      "station": "NehruNagar",
+      "horizon": "target_0_24h",
+      "model": "LightGBM leaves=7",
+      "holdout_mae_ug_m3": 10.575224335246842,
+      "rows": 11705
+    },
+    {
+      "file": "nehrunagar_target_24_48h.joblib",
+      "sha256": "e609d1293f95e5cc66190233728f40973409bb019a084c41f4a21c8fd6522c91",
+      "station": "NehruNagar",
+      "horizon": "target_24_48h",
+      "model": "LightGBM leaves=7",
+      "holdout_mae_ug_m3": 15.89453437576329,
+      "rows": 11705
+    },
+    {
+      "file": "okhla_target_0_24h.joblib",
+      "sha256": "9d4f8faedab44c02e8be294f109f6b9a3b7e683dd6f549cb1dc79026f8a75c1a",
+      "station": "Okhla",
+      "horizon": "target_0_24h",
+      "model": "LightGBM leaves=7",
+      "holdout_mae_ug_m3": 12.972092132455996,
+      "rows": 11705
+    },
+    {
+      "file": "okhla_target_24_48h.joblib",
+      "sha256": "ce97df9bd240f04fba2aafff4258c4df2b16db8d0df1796d4a7d04dac96faa91",
+      "station": "Okhla",
+      "horizon": "target_24_48h",
+      "model": "HistGradientBoosting",
+      "holdout_mae_ug_m3": 17.578787066621903,
+      "rows": 11705
+    }
+  ]
+}

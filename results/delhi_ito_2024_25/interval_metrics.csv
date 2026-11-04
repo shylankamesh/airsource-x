@@ -1,3 +1,0 @@
-data_label,station,horizon,nominal_coverage,empirical_coverage,mean_interval_width_ugm3,calibration_rows,test_rows,calibration_limitation
-OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED,ITO Delhi CPCB,target_0_24,0.9,0.7153846153846154,63.56845336815466,126,130,"Temporal dependence: coverage is empirical, not guaranteed"
-OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED,ITO Delhi CPCB,target_24_48,0.9,0.7461538461538462,82.64970773661963,123,130,"Temporal dependence: coverage is empirical, not guaranteed"

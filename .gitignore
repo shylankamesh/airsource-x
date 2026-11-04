@@ -1,11 +1,21 @@
-.venv/
-.impeccable-cache/
-work/
 __pycache__/
-.pytest_cache/
-*.pyc
+*.py[cod]
+.venv/
+venv/
+.streamlit/secrets.toml
 .env
-.env.*
-!.env.example
-/data/raw/*.csv
-/data/raw/*.parquet
+*.pkl
+*.joblib
+!models/*.joblib
+data/private/
+data/raw/
+!data/raw/README.md
+.DS_Store
+Thumbs.db
+# Local V7 ingestion database and SQLite sidecars
+data/airsource_observations.sqlite
+data/airsource_observations.sqlite-shm
+data/airsource_observations.sqlite-wal
+
+# Test runner cache
+.pytest_cache/

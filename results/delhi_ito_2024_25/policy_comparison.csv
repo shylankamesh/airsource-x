@@ -1,4 +1,0 @@
-experiment,method,cases,hypothesis_assessments,policy_insufficient_count,unsupported_conclusion_rate,appropriate_abstention_rate,supported_decision_retention,provenance_trace_rate,contradiction_visibility_rate,exact_policy_outcome_match
-SYNTHETIC POLICY-CONSISTENCY TEST; NOT SOURCE ATTRIBUTION,B0-naive,36,72,27,1.0,0.0,1.0,0.0,0.0,
-SYNTHETIC POLICY-CONSISTENCY TEST; NOT SOURCE ATTRIBUTION,B1-badge,36,72,27,1.0,0.0,1.0,0.0,0.0,
-SYNTHETIC POLICY-CONSISTENCY TEST; NOT SOURCE ATTRIBUTION,X-evidence,36,72,27,0.0,1.0,1.0,1.0,1.0,0.9167

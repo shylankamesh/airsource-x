@@ -1,120 +1,210 @@
-# AirSource X — Executable Research Prototype
-**Neural Storm 2026 · Track 2: Green Planet · GP-01: Air Quality Monitoring & Source Attribution**
+# AirSource X
 
-> **Project status (4 November 2026):** The forecasting/evidence prototype and a retrospective single-station evaluation using OpenCity-listed CPCB ITO data are implemented. Results remain unverified against provider publication/availability semantics and do not establish live forecast performance, multi-station Delhi performance, or physical pollution-source attribution. Synthetic policy fixtures remain software consistency tests only.
+**Forecast the pollution. Investigate the evidence. Make uncertainty visible.**
 
-**Tagline:** Forecast the pollution. Investigate the evidence. Make uncertainty visible.
+AirSource X is a Delhi-first environmental intelligence prototype for PM₂.₅ forecasting, station comparison, anomaly screening, and transparent investigation of possible pollution influences. It is designed to show what the available data supports, what it contradicts, and what is still missing.
 
-## Team details (required before Devpost submission)
-- Team name: **Fresh_coderz**
-- Members: **Shylan Kamesh S**, **Sai Santhosh T**, **Derin Godson**
-- Submission: **[https://github.com/shylankamesh/airsource-x](https://github.com/shylankamesh/airsource-x)**
-- Live demo: **[AirSource X on GitHub Pages](https://shylankamesh.github.io/airsource-x/)**
+> **Research prototype:** AirSource X is not an official forecast, source-apportionment system, health diagnosis, or safety alert. A screening pattern is not proof of an emission source. Its bundled results are a retrospective benchmark on a historical, author-curated dataset—not current-air performance or evidence of transfer to other stations or seasons.
 
-## Technologies
+## Neural Storm 2026 submission
 
-Python, pandas, NumPy, scikit-learn, LightGBM, Plotly, Gradio, pytest, and a static HTML/CSS/JavaScript website. SHAP is optional; the committed SHAP examples are synthetic model explanations, not source-causality evidence.
-
-## Delhi CPCB study and website
-
-A retrospective run is included in `results/delhi_ito_2024_25/`, using the OpenCity listing for ITO, Delhi - CPCB 15-minute observations. The source file contains 68,985 rows, spanning 1 January 2024 through 1 January 2026, with 93.257% hourly PM2.5 coverage after aggregation and a 148-hour maximum missing streak. The source includes one blank annual footer row, which is excluded when timestamps are parsed. Review `data_audit.json`, `forecast_splits.json`, and `EXPERIMENT_RESULTS.md` before citing any metric.
-
-The static responsive website is in `website/index.html`. Open it locally, or serve the project directory with any static web server. It presents the one-station retrospective result and makes its limits explicit. It does not claim live forecast validation, all-Delhi generalization, or source attribution. The full hackathon bundle includes the raw CSV at `data/raw/`; this repository includes the raw CSV and provides its source link and checksum in `data/ITO_DELHI_DATA_MANIFEST.md`. OpenCity resource metadata lists the resource as Public Domain; retain CPCB contributor acknowledgement when redistributing or publishing.
-
-Current held-out results (130 issues per horizon): for 0–24h, preceding-24-hour mean MAE is 26.6446 µg/m³, LightGBM MAE is 28.3714, and last-observation MAE is 45.0920; for 24–48h, the respective MAEs are 38.9823, 34.5325, and 57.9046. Validation selects LightGBM for 0–24h and the 24-hour mean for 24–48h. Nominal 90% intervals cover 71.5% and 74.6% of the test cases. These are retrospective metrics from one station and should not be presented as live operational performance.
+| Field | Details |
+|---|---|
+| Track / problem | Track 2: Green Planet · GP-01 Air Quality Monitoring & Source Attribution |
+| Team name | **Fresh_coderz** |
+| Team members | Shylan Kamesh S, Sai Santhosh T, Derin Godson |
+| Public source repository | [github.com/shylankamesh/airsource-x](https://github.com/shylankamesh/airsource-x) · Streamlit V8 source on `main` |
+| Live demo | Deployment pending; add the verified Cloud Run URL here before submission |
+| Demo screenshots / GIF | Add screenshots captured from the running build before submission |
+| Submission deadline | 4 November 2026, 8:00 PM IST |
 
 ## The problem
-PM2.5 warnings and forecasts rarely give non-specialists a transparent, reproducible view of the evidence for *possible* pollution influences. Fire hotspots, wind, and pollutant ratios are non-specific and can be missing or contradictory. Presenting those indicators as measured source fractions is scientifically incorrect.
 
-## Our solution
-AirSource X provides two **actual trained LightGBM forecasts** for one ITO Delhi retrospective run, three baseline comparators (last observation, preceding-24-hour mean, and training-only seasonal mean), separate future 0–24h and 24–48h PM2.5 targets, a deterministic **evidence-hypothesis screening** engine with provenance and knowledge-removal counterfactuals, and a separate historical six-station context view. A conservative policy allows **insufficient evidence** instead of forcing an unsupported explanation. A local interactive Gradio app and a portable HTML report demonstrate results. This **does not quantify source contributions**.
+Air-quality dashboards can display pollutant values without showing whether an episode is shared across monitors, which competing explanations are consistent with observations, or what important measurements are unavailable. Dust, combustion emissions, regional transport, and weather can overlap. A nearby road, factory, or fire is not enough to establish why a monitor recorded a concentration.
 
-### Implemented and executed
-- OpenCity/CPCB-style CSV reader with timestamp parsing, basic QC, negative-value masking, source checksum and 15-minute → hourly coverage gate (3 of 4).
-- Forecast target labels requiring 18 of 24 valid PM2.5 hours, independent 0–24h and 24–48h targets, past-only features and 48h temporal split purge.
-- LightGBM, past-day persistence and training-only calendar mean, plus validation-based safe model selection; actual held-out MAE/RMSE/bias and 150 µg/m³ **exploratory** high-PM-event metrics.
-- Exploratory split-residual 90% interval; held-out coverage is below nominal and is not calibrated for operational use (71.5% and 74.6%).
-- Separate model files, inputs, predictions, held-out test tables, feature importance and temporal split metadata.
-- Verified SHAP model explanations, exported for synthetic LightGBM test cases (not source causality).
-- Two-station coincident observation comparisons; does not infer origin or perform unsupported interpolation.
-- Source-hypothesis engine for biomass burning and dust-like conditions with support, contradiction, missing evidence, alternatives, and deterministic rule IDs.
-- Heuristic next-best-measurement guidance: missing FIRMS / transport / particulate evidence suggests specific checks and limitations.
-- Evidence-removal test controls; 36 variations of 12 synthetic rule-policy scenarios and B0/B1/X comparisons. **Not a ground-truth attribution study.**
-- Interactive Gradio dashboard and fully offline, interactive Plotly HTML report.
-- Separate six-station historical Delhi context (June 2018–October 2019): coverage, observed daily means, and a same-hour network-relative outlier screen. It is not blended with the ITO 2024–2026 forecast experiment.
-- The six-station view aligns exact timestamps and reports hours with all six or at least four stations present. It also lists retrospective hours where at least half of reporting stations exceed their own full-period 90th percentile. These are descriptive screens only: station coordinates are absent and no local source, transport path, or causal event is inferred.
-- Automated test suite: run `python -m pytest -q` to reproduce current totals.
+## What AirSource X does
 
-### Not implemented or empirically validated
-- Independent validation of the downloaded dataset's publication/availability time semantics and source reuse terms.
-- Replicated performance across additional Delhi stations and later independent seasons.
-- Public static website is deployed at [shylankamesh.github.io/airsource-x](https://shylankamesh.github.io/airsource-x/); the interactive Gradio app remains local-only.
-- Real satellite fire ingestion, HYSPLIT trajectories, TROPOMI, MAIAC or actual source apportionment.
-- Source attribution truth labels, human usability study, trained causal source classifier or validated source percentages.
-- True live data deployment or regulatory AQI. Overall AQI cannot be derived from PM2.5 alone.
+- **Two-horizon PM₂.₅ forecast:** forecasts mean concentration for the next 0–24 hours and the following 24–48 hours from station history.
+- **Validation-selected ML:** compares three regularized LightGBM configurations and HistGradientBoosting over three purged expanding-window validation folds, chooses by mean validation MAE, then evaluates on a later untouched test period.
+- **Calibrated uncertainty:** estimates 90% split-conformal interval width on a separate later calibration block and reports actual holdout coverage and mean width. Seasonal shifts can reduce coverage; the nominal level is not guaranteed.
+- **Honest baselines:** compares the selected model with persistence and a weekly same-horizon naive forecast on the same chronological test issue times; the 48-hour purge protects the longer horizon.
+- **Bundled station evidence:** includes six historical Delhi station series (70,227 hourly rows, June 2018–October 2019), with data attribution, license, preparation scripts, and measured temporal holdout results.
+- **Instant reproducible demo:** for the exact bundled dataset, Forecast lab loads the matching station model artifacts and displays the historical forecast and holdout comparison immediately. The full evaluation button still runs a fresh validation, calibration, and fit.
+- **Provider context:** fetches a keyless 48-hour Open-Meteo air-quality and weather outlook for Delhi, with Open-Meteo/CAMS attribution. Provider estimates are visibly separated from ground-monitor observations and are never treated as model-validation truth.
+- **Station watch:** compares synchronized station readings and uses Isolation Forest to flag unusual multivariate rows. A flagged row is not a confirmed incident.
+- **Evidence room:** screens dust-like coarse-particle, combustion-compatible co-pollutant, and regional-versus-local patterns; exposes contradictions and missing evidence; and abstains when coverage is insufficient.
+- **Counterfactual evidence removal:** remove an evidence family and recompute the screening cards to inspect sensitivity. This is a software sensitivity check, not a causal intervention.
+- **Next-best measurement:** recommends a transparent follow-up observation based on the evidence gaps.
+- **Historical replay:** filter records by explicit observation and availability times; missing availability timestamps are not guessed.
+- **Public impact & decisions:** produce a user-threshold review brief for human verification, not official AQI or health advice.
+- **Reliability & research:** inspect the packaged holdout benchmark and locally recorded ingestion freshness.
+- **External context:** OpenAQ and NASA FIRMS connectors with explicit data-class separation; FIRMS proximity is not source attribution.
+- **Provenance exports:** download model metrics and investigation records as CSV/JSON.
+
+## Research choices
+
+The project preserves the proposal's differentiators: multi-station spatial context, evidence-aware investigation with abstention, next-best-measurement decision support, reliability and operational traceability. FIRMS contextual integration is implemented; TROPOMI/MAIAC ingestion and trajectory modelling remain future work.
+
+The product study and implementation choices are documented in [docs/REFERENCE_STUDY.md](docs/REFERENCE_STUDY.md). Forecast definitions, time splitting, evidence thresholds, and limits are in [docs/METHODOLOGY.md](docs/METHODOLOGY.md). Data citation, CC BY 4.0 attribution, preparation, and temporal validation protocol are in [docs/DATA_PROVENANCE.md](docs/DATA_PROVENANCE.md).
+
+## Technology
+
+- Python 3.11
+- Streamlit, pandas, NumPy, Plotly
+- Validation-selected LightGBM candidates with scikit-learn HistGradientBoosting fallback
+- scikit-learn Isolation Forest
+- SHAP provides an on-demand local predictive explanation when supported by the installed model; it is explicitly separated from physical source attribution
+- Open-Meteo Air Quality and Forecast APIs for provider-modelled context
 
 ## Setup
-On Windows PowerShell (Python 3.11 recommended):
-```powershell
-py -3.11 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-python -m scripts.run --synthetic
-python app.py
-```
-On macOS/Linux:
+
+Clone the public repository and create a virtual environment:
+
 ```bash
-python3 -m venv .venv
+git clone https://github.com/shylankamesh/airsource-x.git
+cd airsource-x
+python -m venv .venv
+```
+
+Activate the environment:
+
+```bash
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+
+# macOS / Linux
 source .venv/bin/activate
-pip install -r requirements.txt
-python -m scripts.run --synthetic
-python app.py
 ```
-Open **http://127.0.0.1:7860/**. The Gradio app loads the ITO retrospective run by default. `website/index.html` is the judge-facing static presentation. To inspect synthetic software fixtures, set `AIRSOURCE_RESULTS_DIR=results` before launching the app.
 
-## Run real Delhi station experiments
-1. Use the bundled [ITO Delhi CPCB resource](https://data.opencity.in/dataset/delhi-hourly-air-quality-reports/resource/890f786d-fb9f-475e-8516-191bfa1b01ea), or obtain another station dataset and audit its station ID, timezone, units, coverage, and reuse terms.
-2. Put any replacement CSV into `data/raw/`.
-3. Run:
+Install packages and launch:
+
 ```bash
-python -m scripts.run --csv data/raw/ito_delhi_2024_25.csv --name "ITO Delhi CPCB" --outdir results/delhi_ito_2024_25
-python -m pytest -q
-python app.py
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+streamlit run app.py
 ```
-To compare two stations, add a second `--csv ... --name ...` pair. **Confirm station IDs, date coverage, timestamp timezone, publication delay and co-pollutant units** before publishing quantitative results. The loader assumes unlabelled timestamps are IST; this needs independent verification. DO NOT claim the observational records were issued at time T if the sensor publication/availability delay is unknown. See `docs/METHODOLOGY.md`.
 
-## Data access and licensing
-The bundled ITO resource metadata lists the data license as Public Domain. CPCB asks researchers and other publishers to acknowledge the contributing agencies. See `data/ITO_DELHI_DATA_MANIFEST.md`. Public alternatives: [CPCB](https://airquality.cpcb.gov.in/ccr/), [OpenAQ](https://docs.openaq.org/), [Open-Meteo](https://open-meteo.com/), [NASA FIRMS](https://firms.modaps.eosdis.nasa.gov/). This forecasting experiment uses **no future observed weather** and requires no weather API key. Historical weather forecasts were not integrated.
+Open the local URL printed by Streamlit. The default bundled historical station dataset and model evaluation run locally. Fetching the separate Open-Meteo provider context needs an internet connection and no API key.
 
-## Experimental outputs
-`results/delhi_ito_2024_25/EXPERIMENT_RESULTS.md` contains the retrospective ITO Delhi benchmark. Persistence wins on 0–24h test MAE; raw LightGBM wins on 24–48h test MAE, while validation selection chooses persistence for 24–48h. Nominal 90% intervals under-cover. Results are one-station retrospective evidence, not operational validation. The root `results/` folder retains explicitly labelled synthetic software fixtures and must not be confused with the Delhi run.
+Reproduce the six-station training and holdout report:
 
-Outputs include `forecast_metrics.csv`, `forecast_predictions.csv`, `event_metrics.csv`, `interval_metrics.csv`, `station_overlap.csv`, `station_coverage_report.csv`, `data_audit.json`, `policy_case_results.csv`, `policy_comparison.csv`, `policy_case_trace.json`, model artifacts, and interactive `EXPERIMENT_DASHBOARD.html`.
+```bash
+python scripts/benchmark_public_dataset.py
+```
 
-SHAP is optional and explains model predictions, not physical sources. To regenerate SHAP tables, install `shap>=0.47,<0.60` and run `python -m scripts.explain_models` after a completed experiment.
+This performs three-fold validation-only candidate selection, separate interval calibration, and untouched temporal holdout scoring for every bundled station. To regenerate the prepared CSV from the cited CC BY 4.0 original archive, follow [data/raw/README.md](data/raw/README.md) and run `python scripts/prepare_public_dataset.py`.
 
-## Research documentation
-- [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md): forecast target, leakage prevention, synthetic data protocol, evidence screening rules.
-- [`docs/INTEGRATION_AUDIT.md`](docs/INTEGRATION_AUDIT.md): ZIP comparison, dataset/model integrity finding, integration choices, and limits of the six-station view.
-- [`data/benchmarks/README.md`](data/benchmarks/README.md): six-station benchmark attribution, license, and separation from the ITO run.
-- [`docs/EXPERIMENT_PROTOCOL.md`](docs/EXPERIMENT_PROTOCOL.md): experiments, controls, denominators, reproducible commands.
-- [`docs/SCIENTIFIC_LIMITATIONS.md`](docs/SCIENTIFIC_LIMITATIONS.md): exact remaining scientific blockers.
-- [`docs/DEMO_GUIDE.md`](docs/DEMO_GUIDE.md): judges' walkthrough and honest wording.
+Refit and save the twelve selected station/horizon model bundles:
 
-## Screenshots / demo
-The public site presents the current dark navy and mint design, measured retrospective results, and the study's limits. The image formerly embedded here shows an earlier design and is not presented as a screenshot of the current site. Capture and commit a fresh screenshot of the current public demo before final judging. The Gradio forecasting and evidence-engine dashboard runs locally; its evidence scenarios are synthetic. Do not claim the prototype has solved GP-01 empirically.
+```bash
+python scripts/train_model_artifacts.py
+```
 
-[Open the live demo](https://shylankamesh.github.io/airsource-x/)
+The committed `models/` bundles contain serializable model weights, feature names, training period, holdout summary, forecast interval, and SHA-256 checksums in the manifest. The app only uses these for an instant preview when the bundled dataset hash matches exactly; uploaded data and the full evaluation still fit on the active station data. These are historical research artifacts. Load joblib files only from this trusted repository and use compatible Python/scikit-learn/LightGBM versions.
 
-## AI development tool disclosure (required)
-This project code, documentation, and experimental prototype were developed with assistance from **ChatGPT and OpenAI Codex**. Human review and verification are required. Add any other tools actually used by the team (for example, GitHub Copilot or Cursor) before submission. AI assistance is not evidence that experiments ran; test and experiment results must be independently reproducible.
+## Use the app
 
-## Limitations and appropriate use
-This is a **research screening prototype**, not a chemical source-apportionment method, official AQI reporting service, health diagnosis, source-accusation engine, or emergency warning authority. No sensor/site-specific scientific causal claim or measured economic/public-health impact is established.
+1. The default **Bundled Delhi station history** loads six historical CPCB-derived stations for an immediate, reproducible retrospective analysis. It covers June 2018–October 2019 and is not a live feed. Forecast lab can display its pre-trained station model immediately; choose **Public Delhi context** for a current provider-modelled outlook or **Upload station CSV** to analyze another dataset.
+2. A CSV must include `timestamp` and `pm25`. Recommended columns are `station`, `pm10`, `no2`, `co`, `temperature_c`, `humidity_pct`, `wind_speed_kmh`, `wind_direction_deg`, `latitude`, and `longitude`.
+3. Naive timestamps are interpreted as Asia/Kolkata local time. Timezone-aware timestamps are converted to Asia/Kolkata. Rows are aggregated to hourly station means; gaps remain missing and are not interpolated.
+4. Open **Forecast lab** and run chronological model selection, calibration, and holdout evaluation. The app requires at least 180 hourly rows; reliable results require substantially more continuous coverage.
+5. Review **Station watch** and **Evidence room**. Investigations require station history; regional context needs synchronized peer stations.
+
+Provider-modelled forecasts and user-uploaded observations are separate modes. Do not combine them to train or evaluate a station model unless a documented research design justifies it.
+
+## Evaluation and current status
+
+The repository includes a measured benchmark on the six-station [Delhi Multi-Site Air-Quality Data Set](https://doi.org/10.17632/bzhzr9b64v.1), CC BY 4.0. Per-station details and the exact sample counts, temporal boundaries, model selected by validation, baseline metrics, and interval coverage are in [`reports/public_benchmark.csv`](reports/public_benchmark.csv) and [`reports/public_benchmark.json`](reports/public_benchmark.json). Regenerate them with `python scripts/benchmark_public_dataset.py`.
+
+These are temporal holdout scores on one short historical dataset. They are not an independent replication, spatially held-out results, current-season performance, or evidence of transfer to another city. Do not compare the aggregate station means with results from different test windows or definitions.
+
+| Forecast window | Selected-model MAE (µg/m³) | Persistence MAE (µg/m³) | Stations beating persistence | Mean test interval coverage | Mean interval width (µg/m³) |
+|---|---:|---:|---:|---:|---:|
+| Next 0–24 h | 11.04 | 12.46 | 5 / 6 | 99.1% | 80.3 |
+| Next 24–48 h | 15.86 | 18.05 | 6 / 6 | 99.5% | 108.3 |
+
+Values are macro averages across the six stations, calculated from the committed benchmark CSV; station-level values and sample counts are in `reports/`. Intervals are intentionally conservative on this particular holdout, and their high measured coverage comes with wide ranges. This is one historical temporal split, so it does not establish future-season reliability.
+
+| Deliverable | Status in this repository |
+|---|---|
+| Streamlit dashboard and public provider context | Implemented; local dependencies installed |
+| CSV normalization and quality report | Implemented; six-station source preparation recorded |
+| Two-horizon forecasting and baseline evaluation | Trained and evaluated on a 6-station chronological benchmark; see `reports/` |
+| Candidate selection and calibration | Validation-only model selection plus separate split-conformal calibration block |
+| Isolation Forest anomaly screen | Implemented; exploratory screen, not a validated incident detector |
+| Evidence screening and family ablation | Implemented as preliminary heuristics; not validated against source ground truth |
+| Local SHAP explanations | Implemented on demand; not independently benchmarked |
+| Satellite / FIRMS, trajectories, drift monitoring | Planned |
+| Live deployment and screenshots | Complete only after publishing a verified public demo and capturing the running app |
+
+## Screenshots and demo
+
+Before submitting, publish this V8 code to the team's public source repository and add at least one screenshot captured from the running app with the bundled historical dataset selected. Do not use mock values as observations. Add the public Cloud Run URL to the submission table above only after opening it in a signed-out browser and confirming that the app loads.
+
+A short guided walkthrough is in [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md).
+
+For Google Cloud Run setup, see [DEPLOY_GOOGLE_CLOUD.md](DEPLOY_GOOGLE_CLOUD.md). Do not claim a live demo until its Cloud Run URL has been tested in a signed-out browser.
+
+## Data and scientific limits
+
+- Candidate station datasets must be checked for station identity, coordinates, units, quality flags, measurement cadence, missingness, timezone semantics, licensing, and coverage before use.
+- Uploaded CSV data are not independently verified by this application.
+- Complete consecutive hourly windows are required to create the two future target averages. Gaps are not filled.
+- Evaluation is temporal, not spatial. A random split is not used; train issue times are separated from the test period by 48 hours so the longer target window cannot cross the boundary.
+- The seasonal baseline is available only after at least four weeks of training history.
+- PM₂.₅ concentration is not overall Indian AQI. The app does not calculate overall AQI.
+- Relative screening thresholds are prototype heuristics, not calibrated source-detection thresholds. CO and NO₂ are not source-specific. Satellite, wind, and nearby activity would not by themselves prove causality.
+- A single station cannot reliably separate local emissions from regional transport.
+
+## Responsible AI and development-tool disclosure
+
+ChatGPT and OpenAI Codex were used for project ideation, repository research, implementation assistance, and documentation. All outputs should be reviewed against source documentation and real data; empirical claims must come only from reproducible runs. No LLM is used to generate source-attribution conclusions in this application.
 
 ## License
-No license chosen yet. All rights reserved until the team selects a license; third-party datasets have their own terms.
+
+This repository does not yet include a license. Add one only after the team agrees on the intended reuse terms.
+
+## V3 development workspace status
+
+This ZIP-derived workspace is a separate development copy; the original GitHub repository is not modified.
+
+The first V3 engineering increment adds:
+- Non-destructive observation quality diagnostics (`airsource.quality`).
+- Structured evidence and assessment records with evidence-ID traceability (`airsource.evidence_v3`).
+- Source freshness classification with explicit unavailable/stale states (`airsource.monitoring`).
+- A station metadata registry template (`configs/station_registry_template.csv`).
+- Initial unit tests and a generated historical data-quality audit (`tests/`, `reports/initial_quality_audit.json`).
+- A Data & Methods dashboard section showing additional quality diagnostics.
+
+See `docs/INTEGRATION_BLUEPRINT.md` for architecture decisions, scientific safeguards and implementation gates. These additions are an initial foundation, not a completed or externally validated V3 platform.
+
+Run the tests with:
+
+```bash
+python -m pip install -r requirements.txt
+python -m pytest -q
+```
 
 
+## Multi-station spatial intelligence (V3 increment 4)
+
+The **Spatial intelligence** workspace uses `configs/delhi_station_registry.csv` to display station positions, compare PM2.5 at the latest exact shared timestamp, calculate straight-line station distances, and report pairwise temporal correlations when the overlap threshold is met. Coordinates and alias mappings are sourced and documented in [`docs/SPATIAL_INTELLIGENCE.md`](docs/SPATIAL_INTELLIGENCE.md). This is descriptive station context only: no missing-value interpolation, plume reconstruction, or causal source attribution is performed. Replace or validate the registry before using a different station network.
 
 
+## V5: Pollution episode intelligence
+
+See [`docs/EPISODE_INTELLIGENCE_V5.md`](docs/EPISODE_INTELLIGENCE_V5.md) for the persistent station-level PM2.5 episode screening method, multi-station onset grouping, wind-data quality gate, tests and limitations. A new **Episode intelligence** workspace is available in the Streamlit sidebar. The GitHub Actions workflow is defined under `.github/workflows/ci.yml`.
+
+
+## V6: External environmental data
+
+See [`docs/EXTERNAL_DATA_CONNECTORS_V6.md`](docs/EXTERNAL_DATA_CONNECTORS_V6.md). The External data workspace provides OpenAQ v3 latest sensor readings, configured India OGD resource retrieval and NASA FIRMS fire detections. Sentinel-5P/TROPOMI and MAIAC are catalogued as future work, not yet ingested. Provider datasets remain separate until their schema, units, timing, coverage and quality are verified.
+
+## V7: persistent external observations
+
+V7 adds provenance-aware canonical adapters and a local SQLite research store for OpenAQ latest sensor rows and NASA FIRMS detections. It records ingestion history, deduplicates repeated records, and supports conservative space/time matching of fire detections as contextual evidence only. See [`docs/PERSISTENT_INGESTION_V7.md`](docs/PERSISTENT_INGESTION_V7.md). External ingestion is opt-in through `scripts/ingest_external.py`; no scheduled fetch is activated. The local SQLite file is ignored by Git and may be lost on ephemeral hosting unless a persistent volume is configured.
+
+
+## V8 product workspaces
+
+V8 adds dedicated Historical replay, Public impact & decisions, and Reliability & research pages. It also exposes stored FIRMS detection coordinates in the External data workspace. See [the V8 completion note](docs/AIRSOURCE_X_V8_PRODUCT_COMPLETION.md) for implemented scope, test instructions, and limitations.

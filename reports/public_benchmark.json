@@ -1,0 +1,2140 @@
+{
+  "dataset": {
+    "citation": "Sonawani, S.; Patil, K. (2021), Delhi Multi-Site Air-Quality Data Set, V1, Mendeley Data, doi:10.17632/bzhzr9b64v.1",
+    "license": "CC BY 4.0",
+    "observations": 70227,
+    "stations": [
+      "AshokVihar",
+      "DCStadium",
+      "DwarkaSec8",
+      "Najafgarh",
+      "NehruNagar",
+      "Okhla"
+    ],
+    "first_timestamp": "2018-06-01T00:00:00+05:30",
+    "last_timestamp": "2019-10-01T16:00:00+05:30",
+    "warning": "Curated historical dataset (2018-06 to 2019-10); not a live feed. Results are temporal holdout results for these six stations and this period, not evidence of present-day or geographic transfer."
+  },
+  "protocol": {
+    "split": "Per-station chronological 80/20 holdout; candidate selection averages three expanding-window validation folds, each with 48-hour label purges; separate calibration block; 48-hour purge before test boundary.",
+    "features": "Issue-time observations and trailing history only.",
+    "targets": "Mean PM2.5 at t+1..t+24h and t+25..t+48h; complete hourly windows required.",
+    "metrics": "MAE, RMSE, and prediction-minus-observation bias on identical valid test issue times; 90% split-conformal intervals include calibration and test coverage/width."
+  },
+  "station_diagnostics": {
+    "AshokVihar": {
+      "selected_models": {
+        "target_0_24h": "LightGBM leaves=7",
+        "target_24_48h": "HistGradientBoosting"
+      },
+      "selection": {
+        "target_0_24h": {
+          "method": "mean MAE across purged expanding-window chronological folds",
+          "validation_folds": 3,
+          "calibration_start": "2019-04-07T12:00:00+05:30",
+          "candidates": [
+            {
+              "model": "LightGBM leaves=7",
+              "mae": 90.6243578504978,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 72.20920714041952,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 98.66763855242694,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 100.99622785864695,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=15",
+              "mae": 103.00470217679266,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 75.73206971967672,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 117.31300002858815,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 115.96903678211312,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=31",
+              "mae": 105.32582346740548,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 76.10121087133477,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 110.23458009375372,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 129.64167943712792,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "HistGradientBoosting",
+              "mae": 102.42093719286227,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 77.34330473698813,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 102.92637211516934,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 126.99313472642936,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            }
+          ],
+          "selected": "LightGBM leaves=7"
+        },
+        "target_24_48h": {
+          "method": "mean MAE across purged expanding-window chronological folds",
+          "validation_folds": 3,
+          "calibration_start": "2019-04-07T12:00:00+05:30",
+          "candidates": [
+            {
+              "model": "LightGBM leaves=7",
+              "mae": 122.6878242641014,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 73.99052692377838,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 97.34762863427748,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 196.7253172342483,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=15",
+              "mae": 108.36661762608593,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 73.60434002784613,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 98.97904852061468,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 152.51646432979695,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=31",
+              "mae": 113.89408911347307,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 74.41665805915724,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 103.26049352315935,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 164.00511575810265,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "HistGradientBoosting",
+              "mae": 107.01108166649709,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 69.82282026927498,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 98.46954795968777,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 152.74087677052853,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            }
+          ],
+          "selected": "HistGradientBoosting"
+        }
+      },
+      "uncertainty": {
+        "target_0_24h": {
+          "method": "90% split-conformal absolute-residual interval; calibration block precedes test block",
+          "calibration_samples": 1864,
+          "calibration_radius_ug_m3": 60.7010648334221,
+          "test_coverage": 1.0,
+          "mean_test_interval_width_ug_m3": 101.23739584278334
+        },
+        "target_24_48h": {
+          "method": "90% split-conformal absolute-residual interval; calibration block precedes test block",
+          "calibration_samples": 1864,
+          "calibration_radius_ug_m3": 104.09278363279097,
+          "test_coverage": 1.0,
+          "mean_test_interval_width_ug_m3": 140.90075905107983
+        }
+      },
+      "train_end": "2019-06-24T04:00:00+05:30",
+      "test_start": "2019-06-26T04:00:00+05:30"
+    },
+    "DCStadium": {
+      "selected_models": {
+        "target_0_24h": "LightGBM leaves=7",
+        "target_24_48h": "LightGBM leaves=15"
+      },
+      "selection": {
+        "target_0_24h": {
+          "method": "mean MAE across purged expanding-window chronological folds",
+          "validation_folds": 3,
+          "calibration_start": "2019-04-07T12:00:00+05:30",
+          "candidates": [
+            {
+              "model": "LightGBM leaves=7",
+              "mae": 55.982939459822994,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 49.8203690557619,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 62.40722591890245,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 55.721223404804626,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=15",
+              "mae": 60.923677650483825,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 52.26989744229573,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 71.1444761345715,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 59.35665937458425,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=31",
+              "mae": 60.88396022956156,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 52.55219245022818,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 71.65123114253451,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 58.44845709592199,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "HistGradientBoosting",
+              "mae": 57.611868950041064,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 51.072533040117335,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 66.36421925295087,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 55.39885455705497,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            }
+          ],
+          "selected": "LightGBM leaves=7"
+        },
+        "target_24_48h": {
+          "method": "mean MAE across purged expanding-window chronological folds",
+          "validation_folds": 3,
+          "calibration_start": "2019-04-07T12:00:00+05:30",
+          "candidates": [
+            {
+              "model": "LightGBM leaves=7",
+              "mae": 75.86789276643108,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 53.95533920577158,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 53.986792846244484,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 119.66154624727719,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=15",
+              "mae": 72.64103591039311,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 56.33817425146209,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 55.43651554651382,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 106.14841793320346,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=31",
+              "mae": 81.83274139971566,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 56.023080256562736,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 60.40739212541643,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 129.0677518171678,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "HistGradientBoosting",
+              "mae": 74.39333060365219,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 54.96530025690136,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 57.65693122634496,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 110.55776032771026,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            }
+          ],
+          "selected": "LightGBM leaves=15"
+        }
+      },
+      "uncertainty": {
+        "target_0_24h": {
+          "method": "90% split-conformal absolute-residual interval; calibration block precedes test block",
+          "calibration_samples": 1863,
+          "calibration_radius_ug_m3": 37.08833173481866,
+          "test_coverage": 0.9939577039274925,
+          "mean_test_interval_width_ug_m3": 71.89362160842022
+        },
+        "target_24_48h": {
+          "method": "90% split-conformal absolute-residual interval; calibration block precedes test block",
+          "calibration_samples": 1863,
+          "calibration_radius_ug_m3": 53.820839912781324,
+          "test_coverage": 0.9890972525076319,
+          "mean_test_interval_width_ug_m3": 94.67718568477072
+        }
+      },
+      "train_end": "2019-06-24T03:00:00+05:30",
+      "test_start": "2019-06-26T03:00:00+05:30"
+    },
+    "DwarkaSec8": {
+      "selected_models": {
+        "target_0_24h": "LightGBM leaves=7",
+        "target_24_48h": "LightGBM leaves=7"
+      },
+      "selection": {
+        "target_0_24h": {
+          "method": "mean MAE across purged expanding-window chronological folds",
+          "validation_folds": 3,
+          "calibration_start": "2019-04-07T12:00:00+05:30",
+          "candidates": [
+            {
+              "model": "LightGBM leaves=7",
+              "mae": 78.2182369483344,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 54.54539043436805,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 64.7451528581819,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 115.36416755245324,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=15",
+              "mae": 82.74514586779027,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 54.30619515188572,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 62.35290063375804,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 131.57634181772704,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=31",
+              "mae": 83.34216777543584,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 51.48226592139059,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 59.74525423391375,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 138.7989831710032,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "HistGradientBoosting",
+              "mae": 84.23820531616933,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 54.91885977503715,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 63.25494013785272,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 134.5408160356181,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            }
+          ],
+          "selected": "LightGBM leaves=7"
+        },
+        "target_24_48h": {
+          "method": "mean MAE across purged expanding-window chronological folds",
+          "validation_folds": 3,
+          "calibration_start": "2019-04-07T12:00:00+05:30",
+          "candidates": [
+            {
+              "model": "LightGBM leaves=7",
+              "mae": 96.97833850563677,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 59.62474499253139,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 72.72344566494813,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 158.58682485943083,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=15",
+              "mae": 103.13037615829283,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 61.167010831966415,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 65.95743468254916,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 182.2666829603629,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=31",
+              "mae": 102.02072676560152,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 58.35020957021602,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 67.87745153925594,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 179.8345191873326,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "HistGradientBoosting",
+              "mae": 104.37132687427551,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 58.780624822749346,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 69.44403382889256,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 184.88932197118464,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            }
+          ],
+          "selected": "LightGBM leaves=7"
+        }
+      },
+      "uncertainty": {
+        "target_0_24h": {
+          "method": "90% split-conformal absolute-residual interval; calibration block precedes test block",
+          "calibration_samples": 1863,
+          "calibration_radius_ug_m3": 47.387923884540434,
+          "test_coverage": 0.9974104445403539,
+          "mean_test_interval_width_ug_m3": 88.93141370021219
+        },
+        "target_24_48h": {
+          "method": "90% split-conformal absolute-residual interval; calibration block precedes test block",
+          "calibration_samples": 1863,
+          "calibration_radius_ug_m3": 60.06678257302495,
+          "test_coverage": 1.0,
+          "mean_test_interval_width_ug_m3": 107.43710422696769
+        }
+      },
+      "train_end": "2019-06-24T03:00:00+05:30",
+      "test_start": "2019-06-26T03:00:00+05:30"
+    },
+    "Najafgarh": {
+      "selected_models": {
+        "target_0_24h": "LightGBM leaves=15",
+        "target_24_48h": "LightGBM leaves=31"
+      },
+      "selection": {
+        "target_0_24h": {
+          "method": "mean MAE across purged expanding-window chronological folds",
+          "validation_folds": 3,
+          "calibration_start": "2019-04-07T12:00:00+05:30",
+          "candidates": [
+            {
+              "model": "LightGBM leaves=7",
+              "mae": 59.12946275400632,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 42.54722351316973,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 42.61351871458333,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 92.22764603426589,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=15",
+              "mae": 58.95084116082609,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 46.092883926055194,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 37.7126548520872,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 93.04698470433587,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=31",
+              "mae": 63.8508536486008,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 43.731324951307684,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 38.92117970457458,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 108.90005628992012,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "HistGradientBoosting",
+              "mae": 63.241308487925096,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 46.01977826240834,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 40.99411306654388,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 102.71003413482308,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            }
+          ],
+          "selected": "LightGBM leaves=15"
+        },
+        "target_24_48h": {
+          "method": "mean MAE across purged expanding-window chronological folds",
+          "validation_folds": 3,
+          "calibration_start": "2019-04-07T12:00:00+05:30",
+          "candidates": [
+            {
+              "model": "LightGBM leaves=7",
+              "mae": 63.54970832820118,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 49.13705917059521,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 36.431783042792276,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 105.08028277121605,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=15",
+              "mae": 64.14778454560228,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 48.12895895753564,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 37.117949313150376,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 107.1964453661208,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=31",
+              "mae": 60.86671610393463,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 49.32010975556464,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 38.50697939689528,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 94.77305915934396,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "HistGradientBoosting",
+              "mae": 64.66922887408913,
+              "samples": 2794,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 48.46027300168023,
+                  "samples": 931,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T01:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 37.36028006823348,
+                  "samples": 932,
+                  "train_end": "2018-12-10T01:00:00+05:30",
+                  "validation_start": "2018-12-12T01:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 108.18713355235367,
+                  "samples": 931,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T16:00:00+05:30"
+                }
+              ]
+            }
+          ],
+          "selected": "LightGBM leaves=31"
+        }
+      },
+      "uncertainty": {
+        "target_0_24h": {
+          "method": "90% split-conformal absolute-residual interval; calibration block precedes test block",
+          "calibration_samples": 1863,
+          "calibration_radius_ug_m3": 47.61405757293623,
+          "test_coverage": 1.0,
+          "mean_test_interval_width_ug_m3": 77.49785480428346
+        },
+        "target_24_48h": {
+          "method": "90% split-conformal absolute-residual interval; calibration block precedes test block",
+          "calibration_samples": 1863,
+          "calibration_radius_ug_m3": 54.35050726947671,
+          "test_coverage": 0.9995638901003053,
+          "mean_test_interval_width_ug_m3": 85.57239688919594
+        }
+      },
+      "train_end": "2019-06-24T03:00:00+05:30",
+      "test_start": "2019-06-26T03:00:00+05:30"
+    },
+    "NehruNagar": {
+      "selected_models": {
+        "target_0_24h": "LightGBM leaves=7",
+        "target_24_48h": "LightGBM leaves=7"
+      },
+      "selection": {
+        "target_0_24h": {
+          "method": "mean MAE across purged expanding-window chronological folds",
+          "validation_folds": 3,
+          "calibration_start": "2019-04-07T12:00:00+05:30",
+          "candidates": [
+            {
+              "model": "LightGBM leaves=7",
+              "mae": 91.45443106790025,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 88.91820276436182,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 99.93383928288905,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 85.51125115644984,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=15",
+              "mae": 101.04637483699086,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 89.99389880129597,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 110.6392497640667,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 102.50597594560995,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=31",
+              "mae": 110.04925975746751,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 92.40714033236303,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 112.67642519422387,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 125.06421374581565,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "HistGradientBoosting",
+              "mae": 105.03877274943642,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 88.18575799958614,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 105.38331611196826,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 121.54724413675486,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            }
+          ],
+          "selected": "LightGBM leaves=7"
+        },
+        "target_24_48h": {
+          "method": "mean MAE across purged expanding-window chronological folds",
+          "validation_folds": 3,
+          "calibration_start": "2019-04-07T12:00:00+05:30",
+          "candidates": [
+            {
+              "model": "LightGBM leaves=7",
+              "mae": 117.73883369110456,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 72.69884369134415,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 106.99795051248523,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 173.51970686948428,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=15",
+              "mae": 125.23912716267937,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 70.98575220446526,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 109.42639563904665,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 195.3052336445262,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=31",
+              "mae": 129.92156249761788,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 73.01280399206283,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 103.61533375720862,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 213.13654974358226,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "HistGradientBoosting",
+              "mae": 133.67686769489896,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 70.60935344843024,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 113.99618733432357,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 216.42506230194306,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            }
+          ],
+          "selected": "LightGBM leaves=7"
+        }
+      },
+      "uncertainty": {
+        "target_0_24h": {
+          "method": "90% split-conformal absolute-residual interval; calibration block precedes test block",
+          "calibration_samples": 1864,
+          "calibration_radius_ug_m3": 40.727484902922086,
+          "test_coverage": 0.9982736296935693,
+          "mean_test_interval_width_ug_m3": 76.08100952336103
+        },
+        "target_24_48h": {
+          "method": "90% split-conformal absolute-residual interval; calibration block precedes test block",
+          "calibration_samples": 1864,
+          "calibration_radius_ug_m3": 80.43539081039074,
+          "test_coverage": 1.0,
+          "mean_test_interval_width_ug_m3": 122.19569291402358
+        }
+      },
+      "train_end": "2019-06-24T04:00:00+05:30",
+      "test_start": "2019-06-26T04:00:00+05:30"
+    },
+    "Okhla": {
+      "selected_models": {
+        "target_0_24h": "LightGBM leaves=7",
+        "target_24_48h": "HistGradientBoosting"
+      },
+      "selection": {
+        "target_0_24h": {
+          "method": "mean MAE across purged expanding-window chronological folds",
+          "validation_folds": 3,
+          "calibration_start": "2019-04-07T12:00:00+05:30",
+          "candidates": [
+            {
+              "model": "LightGBM leaves=7",
+              "mae": 59.37693405720707,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 59.62821911058969,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 61.6245404251821,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 56.87804263584943,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=15",
+              "mae": 66.65935764689699,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 63.56450324837323,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 64.06208712496493,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 72.35148256735283,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=31",
+              "mae": 72.66978491446066,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 63.742734304627845,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 66.26189560767213,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 88.00472483108204,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "HistGradientBoosting",
+              "mae": 69.47388485685298,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 63.36176396484464,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 63.16441002535823,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 81.89548058035606,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            }
+          ],
+          "selected": "LightGBM leaves=7"
+        },
+        "target_24_48h": {
+          "method": "mean MAE across purged expanding-window chronological folds",
+          "validation_folds": 3,
+          "calibration_start": "2019-04-07T12:00:00+05:30",
+          "candidates": [
+            {
+              "model": "LightGBM leaves=7",
+              "mae": 91.45643118166025,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 61.47946608901504,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 78.68482673949809,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 134.2050007164676,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=15",
+              "mae": 86.12197811978457,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 61.19637308470266,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 80.32789077442021,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 116.84167050023085,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "LightGBM leaves=31",
+              "mae": 93.38136750334365,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 61.52927487430363,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 80.37483595463706,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 138.23999168109023,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            },
+            {
+              "model": "HistGradientBoosting",
+              "mae": 84.27360708843241,
+              "samples": 2795,
+              "folds": [
+                {
+                  "fold": 1,
+                  "mae": 61.44302138179345,
+                  "samples": 932,
+                  "train_end": "2018-11-01T06:00:00+05:30",
+                  "validation_start": "2018-11-03T06:00:00+05:30",
+                  "validation_end": "2018-12-12T02:00:00+05:30"
+                },
+                {
+                  "fold": 2,
+                  "mae": 78.55271460082892,
+                  "samples": 931,
+                  "train_end": "2018-12-10T02:00:00+05:30",
+                  "validation_start": "2018-12-12T02:00:00+05:30",
+                  "validation_end": "2019-01-19T21:00:00+05:30"
+                },
+                {
+                  "fold": 3,
+                  "mae": 112.82508528267489,
+                  "samples": 932,
+                  "train_end": "2019-01-17T21:00:00+05:30",
+                  "validation_start": "2019-01-19T21:00:00+05:30",
+                  "validation_end": "2019-02-27T17:00:00+05:30"
+                }
+              ]
+            }
+          ],
+          "selected": "HistGradientBoosting"
+        }
+      },
+      "uncertainty": {
+        "target_0_24h": {
+          "method": "90% split-conformal absolute-residual interval; calibration block precedes test block",
+          "calibration_samples": 1864,
+          "calibration_radius_ug_m3": 33.60767627645392,
+          "test_coverage": 0.9559775571860164,
+          "mean_test_interval_width_ug_m3": 65.94049982470139
+        },
+        "target_24_48h": {
+          "method": "90% split-conformal absolute-residual interval; calibration block precedes test block",
+          "calibration_samples": 1864,
+          "calibration_radius_ug_m3": 60.43573517044054,
+          "test_coverage": 0.9808111644134322,
+          "mean_test_interval_width_ug_m3": 98.96337803264475
+        }
+      },
+      "train_end": "2019-06-24T04:00:00+05:30",
+      "test_start": "2019-06-26T04:00:00+05:30"
+    }
+  },
+  "runs": [
+    {
+      "station": "AshokVihar",
+      "horizon": "target_0_24h",
+      "model": "LightGBM leaves=7",
+      "samples": 2317,
+      "mae": 10.59162622845337,
+      "rmse": 13.582459286135636,
+      "bias": 3.2825839943712176,
+      "interval_calibration_samples": 1864,
+      "interval_nominal_level": 0.9,
+      "interval_test_coverage": 1.0,
+      "mean_test_interval_width_ug_m3": 101.23739584278334
+    },
+    {
+      "station": "AshokVihar",
+      "horizon": "target_0_24h",
+      "model": "persistence",
+      "samples": 2317,
+      "mae": 13.95850417062293,
+      "rmse": 18.869166804192872,
+      "bias": 0.22054380664652562
+    },
+    {
+      "station": "AshokVihar",
+      "horizon": "target_0_24h",
+      "model": "Weekly same-horizon naive",
+      "samples": 2317,
+      "mae": 19.034050855991943,
+      "rmse": 24.154922745435112,
+      "bias": 1.8848187311178248
+    },
+    {
+      "station": "AshokVihar",
+      "horizon": "target_24_48h",
+      "model": "HistGradientBoosting",
+      "samples": 2293,
+      "mae": 16.456217138066823,
+      "rmse": 20.572975167969954,
+      "bias": -1.1480683380710588,
+      "interval_calibration_samples": 1864,
+      "interval_nominal_level": 0.9,
+      "interval_test_coverage": 1.0,
+      "mean_test_interval_width_ug_m3": 140.90075905107983
+    },
+    {
+      "station": "AshokVihar",
+      "horizon": "target_24_48h",
+      "model": "persistence",
+      "samples": 2293,
+      "mae": 18.862538654964382,
+      "rmse": 24.789217257310884,
+      "bias": 0.7326282889954937
+    },
+    {
+      "station": "AshokVihar",
+      "horizon": "target_24_48h",
+      "model": "Weekly same-horizon naive",
+      "samples": 2293,
+      "mae": 18.9055004361099,
+      "rmse": 24.062017959834353,
+      "bias": 2.232319377816544
+    },
+    {
+      "station": "DCStadium",
+      "horizon": "target_0_24h",
+      "model": "LightGBM leaves=7",
+      "samples": 2317,
+      "mae": 10.211267739795732,
+      "rmse": 12.62003654573043,
+      "bias": 5.0961046471687315,
+      "interval_calibration_samples": 1863,
+      "interval_nominal_level": 0.9,
+      "interval_test_coverage": 0.9939577039274925,
+      "mean_test_interval_width_ug_m3": 71.89362160842022
+    },
+    {
+      "station": "DCStadium",
+      "horizon": "target_0_24h",
+      "model": "persistence",
+      "samples": 2317,
+      "mae": 10.90392119838872,
+      "rmse": 14.728951262062708,
+      "bias": 0.09866835707092514
+    },
+    {
+      "station": "DCStadium",
+      "horizon": "target_0_24h",
+      "model": "Weekly same-horizon naive",
+      "samples": 2317,
+      "mae": 17.36010556035103,
+      "rmse": 21.568840278482522,
+      "bias": 1.617047007624802
+    },
+    {
+      "station": "DCStadium",
+      "horizon": "target_24_48h",
+      "model": "LightGBM leaves=15",
+      "samples": 2293,
+      "mae": 15.533649127534652,
+      "rmse": 19.900704442416526,
+      "bias": 7.081263495642526,
+      "interval_calibration_samples": 1863,
+      "interval_nominal_level": 0.9,
+      "interval_test_coverage": 0.9890972525076319,
+      "mean_test_interval_width_ug_m3": 94.67718568477072
+    },
+    {
+      "station": "DCStadium",
+      "horizon": "target_24_48h",
+      "model": "persistence",
+      "samples": 2293,
+      "mae": 15.964502471289434,
+      "rmse": 21.036748104700116,
+      "bias": 0.4826828027329551
+    },
+    {
+      "station": "DCStadium",
+      "horizon": "target_24_48h",
+      "model": "Weekly same-horizon naive",
+      "samples": 2293,
+      "mae": 17.3319386902166,
+      "rmse": 21.572025478508735,
+      "bias": 1.8181194577700248
+    },
+    {
+      "station": "DwarkaSec8",
+      "horizon": "target_0_24h",
+      "model": "LightGBM leaves=7",
+      "samples": 2317,
+      "mae": 12.548547627173814,
+      "rmse": 15.945829502831481,
+      "bias": 3.2705128701017467,
+      "interval_calibration_samples": 1863,
+      "interval_nominal_level": 0.9,
+      "interval_test_coverage": 0.9974104445403539,
+      "mean_test_interval_width_ug_m3": 88.93141370021219
+    },
+    {
+      "station": "DwarkaSec8",
+      "horizon": "target_0_24h",
+      "model": "persistence",
+      "samples": 2317,
+      "mae": 13.441984630269026,
+      "rmse": 18.423992085926063,
+      "bias": 0.14972216227880886
+    },
+    {
+      "station": "DwarkaSec8",
+      "horizon": "target_0_24h",
+      "model": "Weekly same-horizon naive",
+      "samples": 2317,
+      "mae": 20.37140490109337,
+      "rmse": 25.050884460507856,
+      "bias": 2.202106711264566
+    },
+    {
+      "station": "DwarkaSec8",
+      "horizon": "target_24_48h",
+      "model": "LightGBM leaves=7",
+      "samples": 2293,
+      "mae": 16.628112278334424,
+      "rmse": 20.369145059191638,
+      "bias": 5.2640005385434625,
+      "interval_calibration_samples": 1863,
+      "interval_nominal_level": 0.9,
+      "interval_test_coverage": 1.0,
+      "mean_test_interval_width_ug_m3": 107.43710422696769
+    },
+    {
+      "station": "DwarkaSec8",
+      "horizon": "target_24_48h",
+      "model": "persistence",
+      "samples": 2293,
+      "mae": 19.0791617458933,
+      "rmse": 25.29735549582973,
+      "bias": 0.6898486335223144
+    },
+    {
+      "station": "DwarkaSec8",
+      "horizon": "target_24_48h",
+      "model": "Weekly same-horizon naive",
+      "samples": 2293,
+      "mae": 20.307113747274315,
+      "rmse": 25.014312919637877,
+      "bias": 2.500013628434365
+    },
+    {
+      "station": "Najafgarh",
+      "horizon": "target_0_24h",
+      "model": "LightGBM leaves=15",
+      "samples": 2317,
+      "mae": 9.33145662248744,
+      "rmse": 11.840733673451194,
+      "bias": 0.21718556628612912,
+      "interval_calibration_samples": 1863,
+      "interval_nominal_level": 0.9,
+      "interval_test_coverage": 1.0,
+      "mean_test_interval_width_ug_m3": 77.49785480428346
+    },
+    {
+      "station": "Najafgarh",
+      "horizon": "target_0_24h",
+      "model": "persistence",
+      "samples": 2317,
+      "mae": 10.654740402819739,
+      "rmse": 14.848452245137844,
+      "bias": 0.15296360235937267
+    },
+    {
+      "station": "Najafgarh",
+      "horizon": "target_0_24h",
+      "model": "Weekly same-horizon naive",
+      "samples": 2317,
+      "mae": 15.543052174866927,
+      "rmse": 19.041713600182693,
+      "bias": 2.323056035102862
+    },
+    {
+      "station": "Najafgarh",
+      "horizon": "target_24_48h",
+      "model": "LightGBM leaves=31",
+      "samples": 2293,
+      "mae": 13.063258125813336,
+      "rmse": 17.350203619294465,
+      "bias": 1.7062343249958078,
+      "interval_calibration_samples": 1863,
+      "interval_nominal_level": 0.9,
+      "interval_test_coverage": 0.9995638901003053,
+      "mean_test_interval_width_ug_m3": 85.57239688919594
+    },
+    {
+      "station": "Najafgarh",
+      "horizon": "target_24_48h",
+      "model": "persistence",
+      "samples": 2293,
+      "mae": 15.098183340965257,
+      "rmse": 20.231441380873882,
+      "bias": 0.7229339293501964
+    },
+    {
+      "station": "Najafgarh",
+      "horizon": "target_24_48h",
+      "model": "Weekly same-horizon naive",
+      "samples": 2293,
+      "mae": 15.335087682439308,
+      "rmse": 18.79149814739516,
+      "bias": 2.7180186073557207
+    },
+    {
+      "station": "NehruNagar",
+      "horizon": "target_0_24h",
+      "model": "LightGBM leaves=7",
+      "samples": 2317,
+      "mae": 10.575224335246842,
+      "rmse": 13.292623058848026,
+      "bias": 2.209290386291261,
+      "interval_calibration_samples": 1864,
+      "interval_nominal_level": 0.9,
+      "interval_test_coverage": 0.9982736296935693,
+      "mean_test_interval_width_ug_m3": 76.08100952336103
+    },
+    {
+      "station": "NehruNagar",
+      "horizon": "target_0_24h",
+      "model": "persistence",
+      "samples": 2317,
+      "mae": 12.913904773773558,
+      "rmse": 18.241927345264887,
+      "bias": 0.12070655301395478
+    },
+    {
+      "station": "NehruNagar",
+      "horizon": "target_0_24h",
+      "model": "Weekly same-horizon naive",
+      "samples": 2317,
+      "mae": 18.056417241763775,
+      "rmse": 22.479862986560548,
+      "bias": 1.5834906847935541
+    },
+    {
+      "station": "NehruNagar",
+      "horizon": "target_24_48h",
+      "model": "LightGBM leaves=7",
+      "samples": 2293,
+      "mae": 15.89453437576329,
+      "rmse": 20.57649430170753,
+      "bias": 4.457352390797845,
+      "interval_calibration_samples": 1864,
+      "interval_nominal_level": 0.9,
+      "interval_test_coverage": 1.0,
+      "mean_test_interval_width_ug_m3": 122.19569291402358
+    },
+    {
+      "station": "NehruNagar",
+      "horizon": "target_24_48h",
+      "model": "persistence",
+      "samples": 2293,
+      "mae": 18.206761520569852,
+      "rmse": 24.43958221334926,
+      "bias": 0.5441106992295393
+    },
+    {
+      "station": "NehruNagar",
+      "horizon": "target_24_48h",
+      "model": "Weekly same-horizon naive",
+      "samples": 2293,
+      "mae": 18.004274785215873,
+      "rmse": 22.455953038372453,
+      "bias": 1.8411969399622037
+    },
+    {
+      "station": "Okhla",
+      "horizon": "target_0_24h",
+      "model": "LightGBM leaves=7",
+      "samples": 2317,
+      "mae": 12.972092132455995,
+      "rmse": 20.392440233221578,
+      "bias": 1.8354150100981543,
+      "interval_calibration_samples": 1864,
+      "interval_nominal_level": 0.9,
+      "interval_test_coverage": 0.9559775571860164,
+      "mean_test_interval_width_ug_m3": 65.94049982470139
+    },
+    {
+      "station": "Okhla",
+      "horizon": "target_0_24h",
+      "model": "persistence",
+      "samples": 2317,
+      "mae": 12.903915042799598,
+      "rmse": 20.561742860336675,
+      "bias": 0.1276569917997409
+    },
+    {
+      "station": "Okhla",
+      "horizon": "target_0_24h",
+      "model": "Weekly same-horizon naive",
+      "samples": 2317,
+      "mae": 23.583339119551145,
+      "rmse": 37.30113454535652,
+      "bias": 1.5166342972234192
+    },
+    {
+      "station": "Okhla",
+      "horizon": "target_24_48h",
+      "model": "HistGradientBoosting",
+      "samples": 2293,
+      "mae": 17.578787066621903,
+      "rmse": 26.430044647646096,
+      "bias": -1.7102309370243034,
+      "interval_calibration_samples": 1864,
+      "interval_nominal_level": 0.9,
+      "interval_test_coverage": 0.9808111644134322,
+      "mean_test_interval_width_ug_m3": 98.96337803264475
+    },
+    {
+      "station": "Okhla",
+      "horizon": "target_24_48h",
+      "model": "persistence",
+      "samples": 2293,
+      "mae": 21.10410450392499,
+      "rmse": 34.18802229705044,
+      "bias": 0.5044110699229538
+    },
+    {
+      "station": "Okhla",
+      "horizon": "target_24_48h",
+      "model": "Weekly same-horizon naive",
+      "samples": 2293,
+      "mae": 23.685606951591797,
+      "rmse": 37.46317735876999,
+      "bias": 1.6694286960314002
+    }
+  ]
+}

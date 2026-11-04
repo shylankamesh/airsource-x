@@ -1,30 +1,37 @@
-# AirSource X: Methodology and Reproducibility
+# AirSource X methodology
 
-## Data mode and scope
-The package contains two separate evaluation tracks: (1) a retrospective observational forecast run for ITO, Delhi - CPCB using the CSV and source manifest in `data/raw/`; and (2) deterministic synthetic fixtures used only to test evidence-rule software behavior. Synthetic evidence-policy metrics are not atmospheric accuracy. The Delhi observations are CPCB-derived but have not been independently audited for station publication/availability time semantics, so forecast skill is retrospective rather than validated as-issued operational accuracy.
+## Data contract
 
-## Quality and time
-CSV timestamps without timezone offsets are assumed Asia/Kolkata, NOT verified. Duplicates averaged after timestamp grouping; source-marked invalid values require provider-specific expansion. Negative pollution values become NA. Hourly PM2.5 from a 15-minute feed requires 3 of 4 valid rows. Missing labels are never filled: each 24h target requires 18 actual valid hours. Past features also require a minimum of 18 valid readings in the preceding 24 hours.
+The station workflow requires a timestamp and PM₂.₅ concentration in µg/m³. Optional fields are station, PM₁₀, NO₂, CO, SO₂, O₃, temperature (°C), relative humidity (%), wind speed (km/h), wind direction (degrees), precipitation (mm), latitude, and longitude. Confirm original units before upload. The app does not infer or convert concentration units.
 
-## Forecast issue and targets
-For a daily issue T = midnight Asia/Kolkata, the model's features are sourced only from timestamps `< T`. Target A = arithmetic mean of observed hourly PM2.5 over `(T,T+24h]`; target B = `(T+24h,T+48h]`. **Operational timestamps**: CPCB original measurement timestamp may not be when published. The code assumes a prior reading could be used after its timestamp, but this has not been independently validated for real source records. This must be audited before honest operational replay.
+Naive timestamps are interpreted as Asia/Kolkata local time; offset-aware timestamps are converted to Asia/Kolkata. Duplicate station/timestamp rows retain the last row. Measurements are aggregated into left-closed hourly means. Missing hours and values remain missing. Negative pollutant values and negative wind/precipitation values are set to missing and counted in the quality report.
 
-## Models and splits
-Per station, the earlier 60% of eligible issues train the model, the next 20% validate, and the latest 20% test. Observations are excluded between partitions with a two-day embargo to avoid overlapping 48-hour labels. Controls include the latest observed hourly PM2.5 value, the mean of the preceding 24 valid hourly values, and a training-only monthly calendar mean. LightGBM uses fixed hyperparameters. The **validation** block alone selects among LightGBM and these three baselines; test is never used for selection. Test MAE, RMSE, mean bias, and forecast sample counts are reported per horizon.
+## Forecast targets and features
 
-## Forecast feature time safety
-Features include lagged PM2.5 means and dispersion; past co-pollutant and observed past meteorological averages; and calendar features. Future observed weather is NEVER included. This first executable cut intentionally excludes future archived weather forecasts rather than incorrectly treating reanalysis as available at the issue time. Optional missing features remain NaN (LightGBM handles missing). No scaler or imputer is fitted on future data.
+For issue time `t`, target A is the mean of PM₂.₅ in consecutive hourly bins `t+1` through `t+24`. Target B is the mean in `t+25` through `t+48`. Each target requires all 24 hourly bins; missing bins invalidate that target. Features use only values available at issue time: current pollutant/weather inputs, lags and trailing means, wind-direction sine/cosine, and cyclic hour, weekday, and day-of-year values.
 
-## Forecast interval caveat
-The optional 90% interval uses absolute validation residual quantile and a symmetric band around LightGBM held-out predictions. This is an exploratory split-residual interval; temporal autocorrelation/distribution shift invalidate automatic exchangeability assumptions. Empirical coverage is always reported, and 90% nominal cannot be claimed as calibrated if coverage is worse.
+The app compares three regularized LightGBM configurations and scikit-learn HistGradientBoosting using three expanding-window chronological validation folds. Each fold has a 48-hour label purge, and candidate selection uses mean fold MAE. It then reports untouched-test performance. A separate later calibration block estimates a 90% split-conformal absolute-residual interval; its empirical coverage is measured on the untouched test and can degrade under seasonal/distribution shift. The latest row with a current PM₂.₅ value is the forecast issue row. No future weather forecast is fed into this station-history model in the current build.
 
-## Source-hypothesis engine
-Outputs are qualitative rule states: `supporting evidence present`, `mixed/contradictory`, `limited evidence`, `insufficient evidence`. Biomass-burning support requires independently observable fire coverage and transport compatibility. Dust-like evidence needs paired PM2.5/PM10 and compatible wind context. Humidity and wind speed share a meteorological evidence family; multiple measurements are not automatically independent. Rule thresholds are **project heuristics not physically validated emission indicators**. Missing FIRMS evidence is not 'zero fires'. Evidence-removal counterfactuals simulate missing information, not pollution interventions.
+## Evaluation
 
-## Six-station historical context
-The separate June 2018–October 2019 benchmark retains its six station labels and missing values. Station comparisons are aligned on exact Asia/Kolkata timestamps; the app reports the number of timestamps with all stations and with at least four stations observed. Daily curves are emitted only when a station-day has at least 18 valid hourly observations. The same-hour relative outlier screen uses the network median, median absolute deviation with an IQR fallback, and a 1 µg/m³ minimum scale. This identifies unusual values relative to peers; it does not establish a local event or sensor fault.
+Evaluation sorts issue times, uses the earlier training period for fitting and purged validation, a later calibration block, and reserves the final 20% as an untouched test interval. Each adjacent boundary has a 48-hour purge so target labels cannot cross the boundary. The comparison includes persistence (issue-time PM₂.₅) and a weekly same-horizon naive baseline (the observed target from one week earlier, available at issue time; the same-hour-of-week training mean is only used if that exact lag is missing).
 
-A second descriptive screen compares each station to its own full-period 90th percentile and lists timestamps where at least half of the reporting stations exceed that threshold (minimum four reporting stations). Because this threshold uses the full historical period, it is retrospective and not suitable as a real-time detector. Neither screen uses station coordinates, interpolates a geographic field, identifies a transport path, or attributes emissions. The six-station benchmark is never combined with the 2024–2026 ITO forecast evaluation.
+The selected model and both baselines use the same valid test issue times. Results include sample count, MAE, RMSE, mean prediction bias, interval calibration size, nominal level, empirical test coverage, and mean interval width. The bundled benchmark report is generated by the reproducible script; each app run on a different station/CSV computes fresh metrics. The current evaluation is temporal only; it does not establish transfer to another station, season, or region.
 
-## Scientific validation still required
-Independent source-apportionment labels, atmospheric transport analyses, real satellite observations, and real station holdout validation are not available in this execution. All 36 synthetic policy tests are variations of 12 human-authored scenarios. Their policy expectations are predeclared in source code and cannot establish real-world source accuracy. The B0/B1 controls are intentionally weak, not published advanced systems. Report failures rather than hiding them.
+## Anomaly screening
+
+Isolation Forest uses available pollutant and weather columns from the selected station. Missing feature cells are median-filled for this unsupervised screen only. Its flag means a multivariate row is unusual relative to the uploaded dataset. It does not mean an incident occurred or explain the cause.
+
+## Evidence room
+
+The first-build cards use data-relative, station-history quantiles for coarse-particle/wind context, CO/NO₂ co-pollutant context, and synchronized peer-monitor context. At least 24 historical rows are needed for an individual quantile check. The peer monitor comparison is limited to readings in a three-hour window and requires two peers. These thresholds are preliminary screening rules; they have not been calibrated against chemical source apportionment or an independent incident catalog.
+
+The app separately reports support, non-support, missing data, and a next measurement. Removing a family makes its inputs unavailable and recomputes the screening cards. This is an evidence-sensitivity demonstration, not a causal counterfactual or intervention.
+
+## Provider mode
+
+Provider mode fetches Open-Meteo air-quality and weather grid estimates for Delhi (or supplied coordinates). Air-quality guidance notes global products can be 3-hourly, so displayed averages are over the time steps returned. The UI attributes the air-quality data to Open-Meteo and the Copernicus Atmosphere Monitoring Service (CAMS). Provider estimates are useful for a quick interface demonstration, but they are not ground-monitor measurements and are disabled for model training, evaluation, and source investigation. Check Open-Meteo's current API terms and attribution requirements before deployment.
+
+## Not implemented in this build
+
+Satellite TROPOMI/MAIAC feeds, NASA FIRMS fire data, HYSPLIT trajectories, spatial holdout, drift monitoring, and an LLM report assistant are not connected. These require reliable provenance, coverage, and validation before they can support an environmental conclusion. The current build does calculate split-conformal prediction intervals; their empirical coverage is specific to the reported temporal holdout and does not guarantee future coverage.

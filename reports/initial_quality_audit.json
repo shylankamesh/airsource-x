@@ -1,0 +1,105 @@
+{
+  "dataset_file": "data/processed/delhi_multisite_hourly.csv",
+  "raw_rows": 70227,
+  "prepared_rows": 70227,
+  "preparation": {
+    "input_rows": 70227,
+    "discarded_invalid_timestamps": 0,
+    "duplicate_station_timestamps": 0,
+    "negative_values_set_missing": {},
+    "stations": 6,
+    "hourly_rows": 70227,
+    "missing_pm25_rows": 0,
+    "timestamp_policy": "Naive timestamps interpreted as Asia/Kolkata; timezone-aware values converted to Asia/Kolkata.",
+    "missing_policy": "Missing pollutant values remain missing; no interpolation or zero filling was applied."
+  },
+  "quality": {
+    "row_count": 70227,
+    "station_count": 6,
+    "invalid_timestamps": 0,
+    "duplicate_station_timestamps": 0,
+    "missing_by_column": {
+      "pm25": 0,
+      "pm10": 0,
+      "no2": 0,
+      "co": 0,
+      "so2": 0,
+      "o3": 0,
+      "temperature_c": 0,
+      "humidity_pct": 0,
+      "wind_speed_kmh": 0,
+      "wind_direction_deg": 0,
+      "barometric_pressure_mmhg": 0,
+      "solar_radiation_w_m2": 0
+    },
+    "range_violations": {},
+    "gap_count_by_station": {
+      "AshokVihar": 0,
+      "DCStadium": 0,
+      "DwarkaSec8": 0,
+      "Najafgarh": 0,
+      "NehruNagar": 0,
+      "Okhla": 0
+    },
+    "latest_timestamp_utc": "2019-10-01T10:30:00+00:00",
+    "latest_data_age_hours": 62181.76,
+    "stations": [
+      {
+        "station": "AshokVihar",
+        "rows": 11705,
+        "first_timestamp_utc": "2018-05-31T18:30:00+00:00",
+        "last_timestamp_utc": "2019-10-01T10:30:00+00:00",
+        "valid_pm25": 11705,
+        "pm25_missing_fraction": 0.0,
+        "gap_count": 0
+      },
+      {
+        "station": "DCStadium",
+        "rows": 11704,
+        "first_timestamp_utc": "2018-05-31T18:30:00+00:00",
+        "last_timestamp_utc": "2019-10-01T09:30:00+00:00",
+        "valid_pm25": 11704,
+        "pm25_missing_fraction": 0.0,
+        "gap_count": 0
+      },
+      {
+        "station": "DwarkaSec8",
+        "rows": 11704,
+        "first_timestamp_utc": "2018-05-31T18:30:00+00:00",
+        "last_timestamp_utc": "2019-10-01T09:30:00+00:00",
+        "valid_pm25": 11704,
+        "pm25_missing_fraction": 0.0,
+        "gap_count": 0
+      },
+      {
+        "station": "Najafgarh",
+        "rows": 11704,
+        "first_timestamp_utc": "2018-05-31T18:30:00+00:00",
+        "last_timestamp_utc": "2019-10-01T09:30:00+00:00",
+        "valid_pm25": 11704,
+        "pm25_missing_fraction": 0.0,
+        "gap_count": 0
+      },
+      {
+        "station": "NehruNagar",
+        "rows": 11705,
+        "first_timestamp_utc": "2018-05-31T18:30:00+00:00",
+        "last_timestamp_utc": "2019-10-01T10:30:00+00:00",
+        "valid_pm25": 11705,
+        "pm25_missing_fraction": 0.0,
+        "gap_count": 0
+      },
+      {
+        "station": "Okhla",
+        "rows": 11705,
+        "first_timestamp_utc": "2018-05-31T18:30:00+00:00",
+        "last_timestamp_utc": "2019-10-01T10:30:00+00:00",
+        "valid_pm25": 11705,
+        "pm25_missing_fraction": 0.0,
+        "gap_count": 0
+      }
+    ],
+    "policy": "Diagnostics only: no interpolation, zero filling, clipping, or silent row deletion."
+  },
+  "important_interpretation": "Historical dataset diagnostics only; latest-data age is not a live-feed freshness measure."
+}
