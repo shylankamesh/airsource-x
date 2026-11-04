@@ -198,7 +198,7 @@ def evaluate_forecasts(issues,outdir, data_label='UNVERIFIED',train_per_station=
             model_folder=output/'models'/str(name).replace('/','_')
             model_folder.mkdir(parents=True,exist_ok=True)
             joblib.dump(model,model_folder/f'{horizon}_lightgbm.joblib')
-            (model_folder/f'{horizon}_metadata.json').write_text(json.dumps({'station':name,'horizon':horizon,'features':FEATURES,'train_last':str(train.issue_ist.max()),'test_first':str(test.issue_ist.min()),'data_label':data_label},indent=2))
+            (model_folder/f'{horizon}_metadata.json').write_text(json.dumps({'station':name,'horizon':horizon,'features':FEATURES,'train_last':str(train.issue_ist.max()),'test_first':str(test.issue_ist.min()),'data_label':data_label},indent=2),encoding='utf-8')
             model_pred=np.maximum(model.predict(test[FEATURES]),0)
             val_pred=np.maximum(model.predict(val[FEATURES]),0)
             # Simple split-conformal residual interval; dependent time series may
@@ -217,25 +217,33 @@ def evaluate_forecasts(issues,outdir, data_label='UNVERIFIED',train_per_station=
                                      'calibration_limitation':'Temporal dependence: coverage is empirical, not guaranteed'})
             persistence=test.pm_lag24_mean.to_numpy()
             persistence_val=val.pm_lag24_mean.to_numpy()
+            # Main-version comparator: last available hourly observation. Keep it
+            # separate from the preceding-24-hour mean persistence baseline.
+            last_observed=test.pm_last_valid.to_numpy()
+            last_observed_val=val.pm_last_valid.to_numpy()
             # Calendar baseline fitted on train rows ONLY; month fallback global.
             monthly=train.groupby('month_cos')[horizon].mean() if False else train.groupby(train.issue_ist.dt.month)[horizon].mean()
             seasonal=test.issue_ist.dt.month.map(monthly).fillna(train[horizon].mean()).to_numpy()
             seasonal_val=val.issue_ist.dt.month.map(monthly).fillna(train[horizon].mean()).to_numpy()
-            validation_candidates={'LightGBM':val_pred,'Persistence':persistence_val,'Seasonal':seasonal_val}
+            validation_candidates={'LightGBM':val_pred,'Last-observation':last_observed_val,
+                                   'Persistence':persistence_val,'Seasonal':seasonal_val}
             chosen=min(validation_candidates,key=lambda k:mean_absolute_error(val[horizon],validation_candidates[k]))
-            champion={'LightGBM':model_pred,'Persistence':persistence,'Seasonal':seasonal}[chosen]
+            champion={'LightGBM':model_pred,'Last-observation':last_observed,
+                      'Persistence':persistence,'Seasonal':seasonal}[chosen]
             (model_folder/f'{horizon}_selected.json').write_text(json.dumps({
                 'method_chosen_by_validation':chosen,
                 'validation_mae':{k:float(mean_absolute_error(val[horizon],v)) for k,v in validation_candidates.items()},
-                'SELECTION_POLICY':'lowest validation MAE only; test data never consulted'},indent=2))
+                'SELECTION_POLICY':'lowest validation MAE only; test data never consulted'},indent=2),encoding='utf-8')
             metrics={'LightGBM':get_metrics(test[horizon],model_pred),
+                     'Last-observation':get_metrics(test[horizon],last_observed),
                      'Persistence':get_metrics(test[horizon],persistence),
                      'Seasonal':get_metrics(test[horizon],seasonal),
                      'Validation-selected':get_metrics(test[horizon],champion)}
             # Predeclared exploratory elevated-pollution threshold; NOT CPCB severe AQI.
             threshold=150.0
             truth=np.asarray(test[horizon],dtype=float)>=threshold
-            for algorithm,yp in [('LightGBM',model_pred),('Persistence',persistence),('Seasonal',seasonal),('Validation-selected',champion)]:
+            for algorithm,yp in [('LightGBM',model_pred),('Last-observation',last_observed),
+                                 ('Persistence',persistence),('Seasonal',seasonal),('Validation-selected',champion)]:
                 alarm=np.asarray(yp,dtype=float)>=threshold
                 hits=int((truth & alarm).sum());misses=int((truth & ~alarm).sum())
                 false=int((~truth & alarm).sum());true_neg=int((~truth & ~alarm).sum())
@@ -251,7 +259,8 @@ def evaluate_forecasts(issues,outdir, data_label='UNVERIFIED',train_per_station=
             for i,T in enumerate(test.issue_ist):
                 predictions.append({'data_label':data_label,'station':name,'issue_ist':T.isoformat(),
                                     'horizon':horizon,'actual':float(test[horizon].iloc[i]),
-                                    'LightGBM':float(model_pred[i]),'Persistence':float(persistence[i]),
+                                    'LightGBM':float(model_pred[i]),'Last-observation':float(last_observed[i]),
+                                    'Persistence':float(persistence[i]),
                                     'Seasonal':float(seasonal[i]),'Validation-selected':float(champion[i]),'selected_method':chosen,'interval_lower':float(interval_lower[i]),'interval_upper':float(interval_upper[i])})
             # 24h and 48h target forecast feature importance is diagnostic, not physical attribution.
             imp=pd.DataFrame({'feature':FEATURES,'importance_gain_or_splits':model.feature_importances_})
@@ -260,7 +269,7 @@ def evaluate_forecasts(issues,outdir, data_label='UNVERIFIED',train_per_station=
     sc.to_csv(output/'forecast_metrics.csv',index=False);pred.to_csv(output/'forecast_predictions.csv',index=False)
     pd.DataFrame(event_results).to_csv(output/'event_metrics.csv',index=False)
     pd.DataFrame(interval_results).to_csv(output/'interval_metrics.csv',index=False)
-    (output/'forecast_splits.json').write_text(json.dumps(splits,indent=2))
+    (output/'forecast_splits.json').write_text(json.dumps(splits,indent=2),encoding='utf-8')
     return sc,pred,splits
 
 

@@ -18,13 +18,13 @@ A retrospective run is included in `results/delhi_ito_2024_25/`, using the OpenC
 
 The static responsive website is in `website/index.html`. Open it locally, or serve the project directory with any static web server. It presents the one-station retrospective result and makes its limits explicit. It does not claim live forecast validation, all-Delhi generalization, or source attribution. The full hackathon bundle includes the raw CSV at `data/raw/`; this repository includes the raw CSV and provides its source link and checksum in `data/ITO_DELHI_DATA_MANIFEST.md`. OpenCity resource metadata lists the resource as Public Domain; retain CPCB contributor acknowledgement when redistributing or publishing.
 
-Current held-out results: for 0–24h, persistence MAE is 26.6446 µg/m³ and LightGBM MAE is 28.3714; for 24–48h, persistence is 38.9823 and LightGBM is 34.5325. Nominal 90% intervals cover 71.5% and 74.6% of the respective test cases. These are retrospective metrics from one station and should not be presented as live operational performance.
+Current held-out results (130 issues per horizon): for 0–24h, preceding-24-hour mean MAE is 26.6446 µg/m³, LightGBM MAE is 28.3714, and last-observation MAE is 45.0920; for 24–48h, the respective MAEs are 38.9823, 34.5325, and 57.9046. Validation selects LightGBM for 0–24h and the 24-hour mean for 24–48h. Nominal 90% intervals cover 71.5% and 74.6% of the test cases. These are retrospective metrics from one station and should not be presented as live operational performance.
 
 ## The problem
 PM2.5 warnings and forecasts rarely give non-specialists a transparent, reproducible view of the evidence for *possible* pollution influences. Fire hotspots, wind, and pollutant ratios are non-specific and can be missing or contradictory. Presenting those indicators as measured source fractions is scientifically incorrect.
 
 ## Our solution
-AirSource X provides two **actual trained LightGBM forecasts**, two simple independent baselines, separate future 0–24h and 24–48h PM2.5 targets, and a deterministic **evidence-hypothesis screening** engine with provenance and knowledge-removal counterfactuals. A conservative policy allows **insufficient evidence** instead of forcing an unsupported explanation. A local interactive Gradio app and a portable HTML report demonstrate results. This **does not quantify source contributions**.
+AirSource X provides two **actual trained LightGBM forecasts** for one ITO Delhi retrospective run, three baseline comparators (last observation, preceding-24-hour mean, and training-only seasonal mean), separate future 0–24h and 24–48h PM2.5 targets, a deterministic **evidence-hypothesis screening** engine with provenance and knowledge-removal counterfactuals, and a separate historical six-station context view. A conservative policy allows **insufficient evidence** instead of forcing an unsupported explanation. A local interactive Gradio app and a portable HTML report demonstrate results. This **does not quantify source contributions**.
 
 ### Implemented and executed
 - OpenCity/CPCB-style CSV reader with timestamp parsing, basic QC, negative-value masking, source checksum and 15-minute → hourly coverage gate (3 of 4).
@@ -38,6 +38,7 @@ AirSource X provides two **actual trained LightGBM forecasts**, two simple indep
 - Heuristic next-best-measurement guidance: missing FIRMS / transport / particulate evidence suggests specific checks and limitations.
 - Evidence-removal test controls; 36 variations of 12 synthetic rule-policy scenarios and B0/B1/X comparisons. **Not a ground-truth attribution study.**
 - Interactive Gradio dashboard and fully offline, interactive Plotly HTML report.
+- Separate six-station historical Delhi context (June 2018–October 2019): coverage, observed daily means, and a same-hour network-relative outlier screen. It is not blended with the ITO 2024–2026 forecast experiment.
 - Automated test suite: run `python -m pytest -q` to reproduce current totals.
 
 ### Not implemented or empirically validated
@@ -90,6 +91,8 @@ SHAP is optional and explains model predictions, not physical sources. To regene
 
 ## Research documentation
 - [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md): forecast target, leakage prevention, synthetic data protocol, evidence screening rules.
+- [`docs/INTEGRATION_AUDIT.md`](docs/INTEGRATION_AUDIT.md): ZIP comparison, dataset/model integrity finding, integration choices, and limits of the six-station view.
+- [`data/benchmarks/README.md`](data/benchmarks/README.md): six-station benchmark attribution, license, and separation from the ITO run.
 - [`docs/EXPERIMENT_PROTOCOL.md`](docs/EXPERIMENT_PROTOCOL.md): experiments, controls, denominators, reproducible commands.
 - [`docs/SCIENTIFIC_LIMITATIONS.md`](docs/SCIENTIFIC_LIMITATIONS.md): exact remaining scientific blockers.
 - [`docs/DEMO_GUIDE.md`](docs/DEMO_GUIDE.md): judges' walkthrough and honest wording.

@@ -15,10 +15,11 @@ AirSource X is an experimental air-quality research prototype that pairs short-h
 
 - Separate retrospective 0–24h and 24–48h PM2.5 forecast experiments.
 - Chronological train, validation, and test splits with a temporal gap between partitions.
-- LightGBM compared with persistence and a training-only seasonal mean.
+- LightGBM compared with last-observation, preceding-24-hour mean, and training-only seasonal baselines.
 - Hourly aggregation and coverage auditing for 15-minute monitor data.
 - A qualitative evidence-rule prototype with provenance, contradictions, missing evidence, and abstention.
 - A responsive, interactive website presenting the ITO Delhi study and its limitations.
+- A separate historical six-station Delhi view with station coverage, daily observed means, and an exploratory same-hour network-relative outlier screen; it is not used to claim multi-station forecast performance.
 
 ## Delhi study result
 
@@ -27,13 +28,15 @@ Source: OpenCity listing for ITO, Delhi - CPCB, 15-minute records. This retrospe
 | Horizon | Method | MAE (µg/m³) | RMSE (µg/m³) | Bias (µg/m³) |
 |---|---|---:|---:|---:|
 | 0–24h | LightGBM | 28.3714 | 44.0980 | -10.4540 |
+| 0–24h | Last observed hourly value | 45.0920 | 65.0981 | -38.3379 |
 | 0–24h | Persistence | 26.6446 | 42.3394 | -0.7258 |
 | 0–24h | Seasonal mean | 39.8846 | 58.7243 | -16.8635 |
 | 24–48h | LightGBM | 34.5325 | 57.0693 | -10.5718 |
+| 24–48h | Last observed hourly value | 57.9046 | 84.8592 | -42.6489 |
 | 24–48h | Persistence | 38.9823 | 58.9929 | -4.2081 |
 | 24–48h | Seasonal mean | 42.0340 | 62.3870 | -17.8866 |
 
-Persistence is better for 0–24h; LightGBM is better for 24–48h. Validation-selected methods are LightGBM for 0–24h and persistence for 24–48h. Test metrics are reported without using the test set to reselect a model.
+The preceding-24-hour mean is better for 0–24h; raw LightGBM is better for 24–48h. Validation-selected methods are LightGBM for 0–24h and the preceding-24-hour mean for 24–48h. Test metrics are reported without using the test set to reselect a model.
 
 The nominal 90% intervals achieved 71.5% and 74.6% empirical coverage, so they must be described as exploratory and under-covering. The source file contains 68,985 records through 1 January 2026; hourly PM2.5 coverage after aggregation is 93.257%, with a 148-hour maximum missing streak and one blank footer row excluded from timestamped data. The downloaded CSV and source manifest are included in `data/raw/`; acknowledge CPCB and its contributing agencies.
 
@@ -41,9 +44,10 @@ The nominal 90% intervals achieved 71.5% and 74.6% empirical coverage, so they m
 
 1. Open `website/index.html`.
 2. Show the dataset and retrospective scope in the hero and provenance sections.
-3. Switch between the two forecast horizons and compare LightGBM with persistence and the seasonal baseline.
+3. Switch between the two forecast horizons and compare LightGBM with the last observation, preceding-24-hour mean, and seasonal baseline.
 4. Point out the interval under-coverage and the limits section: no live forecast proof, no all-Delhi generalization, and no physical source attribution.
-5. Open `results/delhi_ito_2024_25/EXPERIMENT_RESULTS.md` for the full metrics, split dates, coverage, and policy fixture results.
+5. In Gradio, show the separate historical Multi-station Context tab; clarify that it is descriptive 2018–2019 data, not the ITO forecast test or geographic source evidence.
+6. Open `results/delhi_ito_2024_25/EXPERIMENT_RESULTS.md` for the full metrics, split dates, coverage, and policy fixture results.
 
 ## Limitations to disclose
 

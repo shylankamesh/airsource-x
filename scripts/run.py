@@ -39,7 +39,7 @@ def run(synthetic=False,files=None,names=None,outdir=None):
             audits.append(audit)
             if a['pm25_hour_coverage']<.7:raise ValueError(f'{name}: <70% valid PM2.5; see audit')
             raw[name]=h;issues.append(build_issues(h,station=name))
-    (out/'data_audit.json').write_text(json.dumps(audits,indent=2,default=str))
+    (out/'data_audit.json').write_text(json.dumps(audits,indent=2,default=str),encoding='utf-8')
     pd.DataFrame(audits).to_csv(out/'station_coverage_report.csv',index=False)
     allissues=pd.concat(issues,ignore_index=True)
     allissues.to_csv(out/'forecast_issue_table.csv',index=False)
@@ -63,7 +63,7 @@ def run(synthetic=False,files=None,names=None,outdir=None):
         investigations.append({'station':station,'source_mode':data_label,'input':vars(inputs),
                                'assessments':investigate(inputs),'next_measurement':next_best_measurement(inputs),
                                'remove_wind':remove_evidence(inputs,['WIND'])['diffs']})
-    (out/'historical_investigations.json').write_text(json.dumps(investigations,indent=2))
+    (out/'historical_investigations.json').write_text(json.dumps(investigations,indent=2),encoding='utf-8')
     _write_markdown(out,data_label,audits,scores,policy,overlap,splits)
     _write_html(out,data_label,scores,preds,policy,overlap,investigations)
     print((out/'EXPERIMENT_RESULTS.md').read_text()[:2000]);print('OUTPUT:',str(out))
@@ -84,7 +84,7 @@ def _write_markdown(out,data_label,audits,scores,policy,overlap,splits):
          '## Multi-station overlap','',overlap.to_markdown(index=False) if len(overlap) else 'Not enough stations.','',
          '## Data and model limitations','',
          '- No real Delhi training metrics unless a sourced monitoring CSV was imported and its timestamps/coverage verified.','- Forecast models are lag-only and historic observed weather is used only in past-looking features; no future weather leakage.','- Real monitor publication delays have not been validated; operational as-issued replay requires ingestion availability timestamps.','- Original model uses deterministic LightGBM hyperparameters; no tuning against the untouched test set.','- Overall CPCB AQI not computed from PM2.5 alone.','- FIRMS, HYSPLIT, TROPOMI, and MAIAC are not fetched; they are explicitly unavailable, not zero.','- Source hypotheses are policy-screening, not physical source contributions.','- Spatial comparison is only coincident-station correlation, not causal origin or spatial interpolation.','- The interactive interface is Gradio; it reads the configured result directory and does not claim live operational forecasts.','']
-    (out/'EXPERIMENT_RESULTS.md').write_text('\n'.join(txt))
+    (out/'EXPERIMENT_RESULTS.md').write_text('\n'.join(txt),encoding='utf-8')
 
 def _write_html(out,data_label,scores,preds,policy,overlap,investigations):
     import plotly.graph_objects as go
@@ -93,7 +93,7 @@ def _write_html(out,data_label,scores,preds,policy,overlap,investigations):
     p=preds.loc[(preds.station==preds.station.iloc[0]) & (preds.horizon=='target_0_24')].copy()
     p['issue_ist']=pd.to_datetime(p.issue_ist)
     fig=go.Figure()
-    for name,fill in [('actual','#6ee7b7'),('LightGBM','#63a9ff'),('Persistence','#f7b66a')]:
+    for name,fill in [('actual','#6ee7b7'),('LightGBM','#63a9ff'),('Last-observation','#ed8066'),('Persistence','#f7b66a')]:
         fig.add_trace(go.Scatter(x=p.issue_ist,y=p[name],name=name,mode='lines',line={'color':fill,'width':2 if name=='actual' else 1.4}))
     fig.update_layout(title='Held-out 0–24h forecasts (check DATA STATUS)',template='plotly_dark',
                       paper_bgcolor='#111b2b',plot_bgcolor='#111b2b',height=410,
@@ -125,7 +125,7 @@ def _write_html(out,data_label,scores,preds,policy,overlap,investigations):
     <section class="card"><h3>ML interpretation</h3><p>MAE is measured only against the displayed input dataset. Model feature importance does not establish physical causality.</p></section></div>
     <p class="footer">Generated from executable Python pipeline · No fabricated measurements · See EXPERIMENT_RESULTS.md and the source repository for reproducibility.</p>
     </div></body></html>'''
-    (out/'EXPERIMENT_DASHBOARD.html').write_text(body)
+    (out/'EXPERIMENT_DASHBOARD.html').write_text(body,encoding='utf-8')
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description='AirSource X reproducible experiments')

@@ -1,7 +1,7 @@
 # AirSource X — Evaluation Protocol
 
 ## Experiment A: Forecasting
-- Predictor: LightGBM regressor per target / station; comparators: previous-day persistence and training-only monthly seasonal mean.
+- Predictor: LightGBM regressor per target / station; comparators: latest observed hourly value, preceding-24-hour mean, and training-only monthly seasonal mean.
 - Target: future PM2.5 0–24h and 24–48h arithmetic mean, 18 of 24 hourly labels minimum.
 - Split: chronological train / validation / test, 48h embargo; no randomization.
 - Measures: MAE, RMSE, mean bias, same-row n; plus elevated PM2.5 event recall/precision at a **predeclared exploratory threshold of 150 µg/m³** (not CPCB statutory classification).

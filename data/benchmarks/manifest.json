@@ -1,0 +1,17 @@
+{
+  "dataset": "Delhi Multi-Site Air-Quality Data Set V1 prepared hourly table",
+  "source": "Sonawani, Shilpa; Patil, Kailas (2021), Mendeley Data",
+  "doi": "10.17632/bzhzr9b64v.1",
+  "license": "CC BY 4.0",
+  "stations": ["AshokVihar", "DCStadium", "DwarkaSec8", "Najafgarh", "NehruNagar", "Okhla"],
+  "period": "2018-06 through 2019-10",
+  "rows": 70227,
+  "prepared_csv_sha256": "92cab112b34fe3daf41328c8750bbea38085e322d0347274c0ef15d7af1fbde0",
+  "compressed_file": "delhi_multisite_hourly.csv.gz",
+  "compressed_file_sha256": "c24e3587e48a8eed04a57e8d28699663c8cbfa24e9caaf244b1b3e7e5cf1de51",
+  "notes": [
+    "The gzip file decompresses to the prepared CSV bytes provided in the Main ZIP.",
+    "The prepared CSV digest does not match the digest in the Main ZIP model manifest; those model artifacts are excluded.",
+    "No station coordinates are bundled or assumed. This dataset is separate from the ITO 2024-2026 experiment."
+  ]
+}

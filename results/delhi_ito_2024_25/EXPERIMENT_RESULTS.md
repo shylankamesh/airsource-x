@@ -15,10 +15,12 @@
 | data_label                                             | station        | horizon      | model               |   n |     mae |    rmse |     bias |
 |:-------------------------------------------------------|:---------------|:-------------|:--------------------|----:|--------:|--------:|---------:|
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_0_24  | LightGBM            | 130 | 28.3714 | 44.098  | -10.454  |
+| OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_0_24  | Last-observation    | 130 | 45.092  | 65.0981 | -38.3379 |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_0_24  | Persistence         | 130 | 26.6446 | 42.3394 |  -0.7258 |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_0_24  | Seasonal            | 130 | 39.8846 | 58.7243 | -16.8635 |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_0_24  | Validation-selected | 130 | 28.3714 | 44.098  | -10.454  |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_24_48 | LightGBM            | 130 | 34.5325 | 57.0693 | -10.5718 |
+| OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_24_48 | Last-observation    | 130 | 57.9046 | 84.8592 | -42.6489 |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_24_48 | Persistence         | 130 | 38.9823 | 58.9929 |  -4.2081 |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_24_48 | Seasonal            | 130 | 42.034  | 62.387  | -17.8866 |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_24_48 | Validation-selected | 130 | 38.9823 | 58.9929 |  -4.2081 |
@@ -45,10 +47,12 @@
 | data_label                                             | station        | horizon      | model               |   threshold_ugm3 | threshold_label                              |   actual_events |   hits |   misses |   false_alarms |   true_negatives |   precision |   recall |
 |:-------------------------------------------------------|:---------------|:-------------|:--------------------|-----------------:|:---------------------------------------------|----------------:|-------:|---------:|---------------:|-----------------:|------------:|---------:|
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_0_24  | LightGBM            |              150 | EXPLORATORY high-PM event (not official AQI) |              54 |     43 |       11 |              7 |               69 |    0.86     | 0.796296 |
+| OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_0_24  | Last-observation    |              150 | EXPLORATORY high-PM event (not official AQI) |              54 |     27 |       27 |              1 |               75 |    0.964286 | 0.5      |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_0_24  | Persistence         |              150 | EXPLORATORY high-PM event (not official AQI) |              54 |     45 |        9 |              9 |               67 |    0.833333 | 0.833333 |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_0_24  | Seasonal            |              150 | EXPLORATORY high-PM event (not official AQI) |              54 |     47 |        7 |             10 |               66 |    0.824561 | 0.87037  |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_0_24  | Validation-selected |              150 | EXPLORATORY high-PM event (not official AQI) |              54 |     43 |       11 |              7 |               69 |    0.86     | 0.796296 |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_24_48 | LightGBM            |              150 | EXPLORATORY high-PM event (not official AQI) |              55 |     42 |       13 |             10 |               65 |    0.807692 | 0.763636 |
+| OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_24_48 | Last-observation    |              150 | EXPLORATORY high-PM event (not official AQI) |              55 |     24 |       31 |              4 |               71 |    0.857143 | 0.436364 |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_24_48 | Persistence         |              150 | EXPLORATORY high-PM event (not official AQI) |              55 |     44 |       11 |              9 |               66 |    0.830189 | 0.8      |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_24_48 | Seasonal            |              150 | EXPLORATORY high-PM event (not official AQI) |              55 |     47 |        8 |             10 |               65 |    0.824561 | 0.854545 |
 | OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED | ITO Delhi CPCB | target_24_48 | Validation-selected |              150 | EXPLORATORY high-PM event (not official AQI) |              55 |     44 |       11 |              9 |               66 |    0.830189 | 0.8      |

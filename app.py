@@ -12,11 +12,14 @@ import numpy as np
 import gradio as gr
 import plotly.graph_objects as go
 from airsource.evidence import policy_fixtures, investigate, remove_evidence, next_best_measurement
+from airsource.station_context import (daily_station_means, load_station_history,
+                                       same_hour_network_outliers, station_coverage)
 
 ROOT=Path(__file__).resolve().parent
 DEFAULT_REAL_RESULTS=ROOT/'results'/'delhi_ito_2024_25'
 RESULTS=Path(__import__('os').environ.get('AIRSOURCE_RESULTS_DIR',
              str(DEFAULT_REAL_RESULTS if (DEFAULT_REAL_RESULTS/'forecast_metrics.csv').exists() else ROOT/'results')))
+STATION_HISTORY=ROOT/'data'/'benchmarks'/'delhi_multisite_hourly.csv.gz'
 CASES=policy_fixtures()
 CASENAMES=[f"{c['id']} | {c['scenario']}" for c in CASES]
 STYLE='''
@@ -33,11 +36,37 @@ def plot_pred(station,horizon):
     f=go.Figure()
     if len(p):
         p=p.loc[(p.station==station)&(p.horizon==horizon)]
-        for key,color in [('actual','#2ca58d'),('LightGBM','#3386c7'),('Persistence','#ef9b43'),('Seasonal','#b480db')]:
+        for key,color in [('actual','#2ca58d'),('LightGBM','#3386c7'),('Last-observation','#e86f51'),('Persistence','#ef9b43'),('Seasonal','#b480db')]:
             f.add_trace(go.Scatter(x=p.issue_ist,y=p[key],name=key,line={'color':color}))
     f.update_layout(template='plotly_white',height=400,xaxis_title='Issue time IST',
                     yaxis_title='Future mean PM2.5 (µg/m³)',margin={'l':60,'r':20,'t':25,'b':50})
     return f
+
+def multi_station_context_view():
+    """Display the separate historical six-station benchmark without blending it with ITO."""
+    figure=go.Figure()
+    if not STATION_HISTORY.is_file():
+        figure.update_layout(template='plotly_white',height=380)
+        return (pd.DataFrame(),figure,pd.DataFrame(),
+                'Six-station data file is unavailable. The single-station ITO experiment remains separate.')
+    try:
+        history=load_station_history(STATION_HISTORY)
+        coverage=station_coverage(history)
+        daily=daily_station_means(history)
+        for station,group in daily.groupby('station',sort=True):
+            figure.add_trace(go.Scatter(x=group['date'],y=group['mean'],mode='lines',name=station,
+                                        connectgaps=False))
+        figure.update_layout(template='plotly_white',height=420,
+            xaxis_title='Observation date (Asia/Kolkata)',yaxis_title='Daily mean PM₂.₅ (µg/m³)',
+            margin={'l':60,'r':20,'t':25,'b':50},legend_title='Historical station')
+        outliers=same_hour_network_outliers(history).head(25)
+        status=('**Separate historical benchmark:** June 2018–October 2019. Lines show daily means only '
+                'when at least 18 hourly observations are present. This dataset is not merged with the '
+                'ITO 2024–2026 forecast evaluation.')
+        return coverage,figure,outliers,status
+    except Exception as exc:
+        figure.update_layout(template='plotly_white',height=380)
+        return pd.DataFrame(),figure,pd.DataFrame(),f'Could not load the separate station benchmark: {exc}'
 
 def investigation_info(case_name,removed):
     idx=CASENAMES.index(case_name)
@@ -104,9 +133,17 @@ def app_factory():
                 gr.Markdown('#### One held-out prediction decomposition')
                 gr.Dataframe(value=fetch_csv('shap_local_example.csv'),interactive=False)
             with gr.Tab('Multi-station Context'):
-                gr.Markdown('Coincident observations only. Correlation does not establish a pollution source or wind trajectory.')
-                gr.Dataframe(value=fetch_csv('station_overlap.csv'),interactive=False)
-                gr.Markdown('Further spatial modelling requires verified station metadata and independent spatial holdout.')
+                coverage,station_plot,outliers,station_status=multi_station_context_view()
+                gr.Markdown('Six-station historical PM₂.₅ context, kept separate from the ITO 2024–2026 forecast experiment.')
+                gr.Markdown(station_status)
+                gr.Markdown('#### Station coverage')
+                gr.Dataframe(value=coverage,interactive=False)
+                gr.Markdown('#### Observed daily means')
+                gr.Plot(value=station_plot)
+                gr.Markdown('#### Same-hour network-relative outlier screen')
+                gr.Markdown('Flags unusual station readings relative to the other stations reporting in the same hour (robust MAD score ≥ 3.5; at least four stations). No coordinates are supplied for this benchmark. These descriptive flags do not establish a localized event, source, transport path, or sensor fault.')
+                gr.Dataframe(value=outliers,interactive=False)
+                gr.Markdown('Source: Sonawani & Patil (2021), Delhi Multi-Site Air-Quality Data Set V1, Mendeley Data, DOI 10.17632/bzhzr9b64v.1; CC BY 4.0. See `docs/INTEGRATION_AUDIT.md` and `docs/DATA_PROVENANCE.md`.')
             with gr.Tab('Reliability & Research'):
                 gr.Markdown('#### B0 / B1 / X policy comparison — synthetic rule fixtures only')
                 gr.Dataframe(value=policy,interactive=False)

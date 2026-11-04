@@ -2,7 +2,7 @@
 
 **DATA STATUS: SYNTHETIC / NOT DELHI MEASUREMENTS**
 
-> Do not cite simulated forecast errors as measured Delhi prediction performance. No physical source-apportionment accuracy is established.
+> Forecast metrics are retrospective observations from one station. They do not establish live/as-issued performance or physical source-apportionment accuracy.
 
 ## Input coverage
 
@@ -16,18 +16,22 @@
 | data_label                         | station     | horizon      | model               |   n |     mae |    rmse |     bias |
 |:-----------------------------------|:------------|:-------------|:--------------------|----:|--------:|--------:|---------:|
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_0_24  | LightGBM            |  84 | 17.6594 | 31.1279 | -15.1289 |
+| SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_0_24  | Last-observation    |  84 | 17.5582 | 22.4851 |  -7.6381 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_0_24  | Persistence         |  84 |  9.5579 | 13.5841 |  -0.4737 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_0_24  | Seasonal            |  84 | 27.7397 | 41.9265 | -25.2317 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_0_24  | Validation-selected |  84 |  9.5579 | 13.5841 |  -0.4737 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_24_48 | LightGBM            |  84 | 19.6461 | 33.6778 | -17.8049 |
+| SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_24_48 | Last-observation    |  84 | 22.2263 | 28.8525 |  -7.427  |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_24_48 | Persistence         |  84 | 16.0718 | 23.6884 |  -0.2626 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_24_48 | Seasonal            |  84 | 27.6298 | 41.3798 | -25.2686 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_24_48 | Validation-selected |  84 | 16.0718 | 23.6884 |  -0.2626 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_0_24  | LightGBM            |  84 | 15.3237 | 26.363  | -12.8629 |
+| SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_0_24  | Last-observation    |  84 | 21.2989 | 26.2376 |  -5.2635 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_0_24  | Persistence         |  84 | 10.1117 | 13.8884 |  -0.5243 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_0_24  | Seasonal            |  84 | 23.7836 | 36.4982 | -22.5097 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_0_24  | Validation-selected |  84 | 10.1117 | 13.8884 |  -0.5243 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_24_48 | LightGBM            |  84 | 16.9435 | 29.4503 | -14.7782 |
+| SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_24_48 | Last-observation    |  84 | 26.9802 | 31.9391 |  -5.0091 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_24_48 | Persistence         |  84 | 15.3627 | 23.083  |  -0.2699 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_24_48 | Seasonal            |  84 | 23.5476 | 35.8264 | -22.2802 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_24_48 | Validation-selected |  84 | 15.3627 | 23.083  |  -0.2699 |
@@ -64,18 +68,22 @@
 | data_label                         | station     | horizon      | model               |   threshold_ugm3 | threshold_label                              |   actual_events |   hits |   misses |   false_alarms |   true_negatives |   precision |   recall |
 |:-----------------------------------|:------------|:-------------|:--------------------|-----------------:|:---------------------------------------------|----------------:|-------:|---------:|---------------:|-----------------:|------------:|---------:|
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_0_24  | LightGBM            |              150 | EXPLORATORY high-PM event (not official AQI) |              20 |      0 |       20 |              0 |               64 |  nan        | 0        |
+| SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_0_24  | Last-observation    |              150 | EXPLORATORY high-PM event (not official AQI) |              20 |     17 |        3 |              5 |               59 |    0.772727 | 0.85     |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_0_24  | Persistence         |              150 | EXPLORATORY high-PM event (not official AQI) |              20 |     17 |        3 |              3 |               61 |    0.85     | 0.85     |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_0_24  | Seasonal            |              150 | EXPLORATORY high-PM event (not official AQI) |              20 |      0 |       20 |              0 |               64 |  nan        | 0        |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_0_24  | Validation-selected |              150 | EXPLORATORY high-PM event (not official AQI) |              20 |     17 |        3 |              3 |               61 |    0.85     | 0.85     |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_24_48 | LightGBM            |              150 | EXPLORATORY high-PM event (not official AQI) |              20 |      0 |       20 |              0 |               64 |  nan        | 0        |
+| SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_24_48 | Last-observation    |              150 | EXPLORATORY high-PM event (not official AQI) |              20 |     15 |        5 |              7 |               57 |    0.681818 | 0.75     |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_24_48 | Persistence         |              150 | EXPLORATORY high-PM event (not official AQI) |              20 |     14 |        6 |              6 |               58 |    0.7      | 0.7      |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_24_48 | Seasonal            |              150 | EXPLORATORY high-PM event (not official AQI) |              20 |      0 |       20 |              0 |               64 |  nan        | 0        |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_A | target_24_48 | Validation-selected |              150 | EXPLORATORY high-PM event (not official AQI) |              20 |     14 |        6 |              6 |               58 |    0.7      | 0.7      |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_0_24  | LightGBM            |              150 | EXPLORATORY high-PM event (not official AQI) |              15 |      0 |       15 |              0 |               69 |  nan        | 0        |
+| SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_0_24  | Last-observation    |              150 | EXPLORATORY high-PM event (not official AQI) |              15 |     10 |        5 |              5 |               64 |    0.666667 | 0.666667 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_0_24  | Persistence         |              150 | EXPLORATORY high-PM event (not official AQI) |              15 |     10 |        5 |              3 |               66 |    0.769231 | 0.666667 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_0_24  | Seasonal            |              150 | EXPLORATORY high-PM event (not official AQI) |              15 |      0 |       15 |              0 |               69 |  nan        | 0        |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_0_24  | Validation-selected |              150 | EXPLORATORY high-PM event (not official AQI) |              15 |     10 |        5 |              3 |               66 |    0.769231 | 0.666667 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_24_48 | LightGBM            |              150 | EXPLORATORY high-PM event (not official AQI) |              14 |      0 |       14 |              0 |               70 |  nan        | 0        |
+| SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_24_48 | Last-observation    |              150 | EXPLORATORY high-PM event (not official AQI) |              14 |      6 |        8 |              9 |               61 |    0.4      | 0.428571 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_24_48 | Persistence         |              150 | EXPLORATORY high-PM event (not official AQI) |              14 |      6 |        8 |              7 |               63 |    0.461538 | 0.428571 |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_24_48 | Seasonal            |              150 | EXPLORATORY high-PM event (not official AQI) |              14 |      0 |       14 |              0 |               70 |  nan        | 0        |
 | SYNTHETIC / NOT DELHI MEASUREMENTS | SYNTHETIC_B | target_24_48 | Validation-selected |              150 | EXPLORATORY high-PM event (not official AQI) |              14 |      6 |        8 |              7 |               63 |    0.461538 | 0.428571 |

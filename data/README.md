@@ -1,6 +1,6 @@
 # Data in this package
 
-`raw/ito_delhi_2024_25.csv` is the OpenCity-listed ITO, Delhi - CPCB 15-minute resource used in the retrospective forecast experiment. `ITO_DELHI_DATA_MANIFEST.md` records the source listing, provenance, checksum, license metadata, timestamp caveat, and coverage audit. The raw data file is included in this repository and the full hackathon bundle. The source listing below is the original provider resource.
+`raw/ito_delhi_2024_25.csv` is the OpenCity-listed ITO, Delhi - CPCB 15-minute resource used in the retrospective forecast experiment. The separate `benchmarks/delhi_multisite_hourly.csv.gz` file supports the six-station historical context view; its source, license, and checksums are documented in `benchmarks/README.md` and `benchmarks/manifest.json`. `ITO_DELHI_DATA_MANIFEST.md` records the source listing, provenance, checksum, license metadata, timestamp caveat, and coverage audit. The raw data file is included in this repository and the full hackathon bundle. The source listing below is the original provider resource.
 
 The OpenCity resource metadata identifies its license as Public Domain. CPCB asks users to acknowledge contributing agencies in research and other publications; preserve that attribution.
 
