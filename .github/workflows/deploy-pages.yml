@@ -36,6 +36,8 @@ jobs:
           cp results/delhi_ito_2024_25/forecast_metrics.csv _site/results/delhi_ito_2024_25/
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
