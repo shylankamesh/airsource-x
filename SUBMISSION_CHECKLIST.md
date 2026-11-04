@@ -16,7 +16,7 @@
 | Team name | PASS | Confirmed by the team: Fresh_coderz. |
 | Public GitHub source | PASS | Repository default branch `main` contains the integrated submission. |
 | Pull request to `main` | PASS | [PR #1](https://github.com/shylankamesh/airsource-x/pull/1) was merged on 4 November 2026. |
-| GitHub Pages / public demo | PASS | Deployment run 41814292917 succeeded. The public site opens at `https://shylankamesh.github.io/airsource-x/`, and both report links resolve under the project path. |
+| GitHub Pages / public demo | PASS | Latest deployment run 41814656372 succeeded. The public site opens at `https://shylankamesh.github.io/airsource-x/`; report links resolve under the project path and the Gradio setup link points to `main`. |
 | Committed UI screenshots | PASS | Genuine capture of the public static demo homepage is in `assets/screenshots/airsource-x-homepage.jpg` and embedded in README. |
 | Clean-clone reproducibility | PASS | Fresh public clone of the branch: 32 passed, 0 failed, 0 skipped using the supplied dependency environment. |
 | Hackathon format and deadline requirements | NOT VERIFIED | Confirm submission form/format and team registration details. |
