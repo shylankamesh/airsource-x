@@ -1,0 +1,24 @@
+{
+  "station": "ITO Delhi CPCB",
+  "horizon": "target_24_48",
+  "features": [
+    "pm_lag24_mean",
+    "pm_lag48_mean",
+    "pm_lag72_mean",
+    "pm_lag7d_mean",
+    "pm_lag24_std",
+    "pm_last_valid",
+    "month_sin",
+    "month_cos",
+    "dayofyear_sin",
+    "dayofyear_cos",
+    "weekday",
+    "pm10_lag24_mean",
+    "no2_lag24_mean",
+    "ws_lag24_mean",
+    "rh_lag24_mean"
+  ],
+  "train_last": "2025-03-08 00:00:00+05:30",
+  "test_first": "2025-08-16 00:00:00+05:30",
+  "data_label": "OBSERVATIONAL CSV; SOURCE AVAILABILITY TIME UNVERIFIED"
+}

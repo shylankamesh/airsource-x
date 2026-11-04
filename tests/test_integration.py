@@ -7,7 +7,7 @@ def test_model_end_to_end(tmp_path):
     h=make_synthetic_fixture(225,seed=88)
     i=build_issues(h,station='SYNTHETIC_INTEGRATION')
     scores,preds,splits=evaluate_forecasts(i,tmp_path,data_label='SYNTHETIC INTEGRATION',train_per_station=True)
-    assert len(scores)==8 # 2 horizons x (LightGBM, Persistence, Seasonal, Validation-selected)
+    assert len(scores)==10 # 2 horizons x (LightGBM, last observation, 24h mean, Seasonal, Validation-selected)
     assert len(preds)>30
     assert (tmp_path/'models/SYNTHETIC_INTEGRATION/target_0_24_lightgbm.joblib').exists()
     assert (tmp_path/'interval_metrics.csv').exists()

@@ -4,7 +4,7 @@
 
 - The Delhi run is a retrospective evaluation at one ITO monitor. It is not a live/as-issued forecast replay because monitor publication/availability timestamps were not audited.
 - The source file spans January 2024 through 1 January 2026, has 93.257% hourly PM2.5 coverage, and a 148-hour maximum PM2.5 gap. One empty footer row has no timestamp.
-- There are 130 held-out valid target issues per horizon. Persistence has lower 0–24h test MAE; LightGBM has lower raw 24–48h test MAE. Validation selects LightGBM for 0–24h and persistence for 24–48h. Do not imply LightGBM wins consistently.
+- There are 130 held-out valid target issues per horizon. The last-observation baseline has substantially higher test error on this split. The preceding-24-hour mean has lower 0–24h test MAE; LightGBM has lower raw 24–48h test MAE. Validation selects LightGBM for 0–24h and the 24-hour mean for 24–48h. Do not imply LightGBM wins consistently.
 - Nominal 90% split-residual intervals cover 71.5% and 74.6% of the two test horizons. They are exploratory and under-cover; they are not calibrated confidence bounds.
 - These results do not establish accuracy at other Delhi stations, for other seasons or cities, or under distribution shift. Independent rolling-origin and station holdouts remain future validation work.
 - LightGBM uses fixed hyperparameters; the final test partition was not used to select a model. The experiment does not show that a tuned or operational system would have the same performance.
