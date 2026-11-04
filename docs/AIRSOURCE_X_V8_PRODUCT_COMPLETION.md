@@ -18,8 +18,8 @@ V8 is a stronger integrated research prototype, not a production-ready environme
 - India OGD records are fetched as raw provider rows; no universal field/unit mapping is assumed.
 - Automated scheduling, retries/backoff, cursor pagination, alerting, and a managed production database are not implemented.
 - The bundled dataset lacks verified publication/availability timestamps, so a defensible historical information-set replay requires a separately sourced ledger.
-- The Streamlit application was syntax-compiled and backend-tested, but browser interaction tests could not be run in this environment because Streamlit was not installed and package-index access was unavailable.
-- No live provider API calls or deployment smoke tests were performed.
+- Local verification: Python sources compiled; 46 automated tests passed; Streamlit started and the bundled historical Forecast lab preview rendered for both horizons in a local browser. This is local demo evidence, not a public deployment check.
+- No live provider API calls or Cloud Run deployment smoke tests have been performed.
 
 ## Scientific and operational safeguards
 
