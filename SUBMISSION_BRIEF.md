@@ -5,7 +5,7 @@
 - Team name: **Fresh_coderz**
 - Members: **Shylan Kamesh S**, **Sai Santhosh T**, **Derin Godson**
 - Public repository: **[https://github.com/shylankamesh/airsource-x](https://github.com/shylankamesh/airsource-x)**
-- Hosted demo: **Not verified; no public interactive demo URL is available.**
+- Hosted demo: [Public static website](https://shylankamesh.github.io/airsource-x/). The interactive Gradio app is local-only.
 
 ## Short description
 
@@ -64,5 +64,5 @@ The separate six-station benchmark contains 70,227 hourly rows spanning June 201
 
 ## Pre-submission fields still required
 
-The team name (Fresh_coderz), member names, and public repository are filled in. Confirm the hackathon's submission format, data reuse terms, and project-license choice. A public hosted demo and committed app screenshots are not verified yet.
+The team name (Fresh_coderz), member names, and public repository are filled in. Confirm the hackathon's submission format, data reuse terms, and project-license choice. The public static website is available. Committed app screenshots are not yet verified.
 
