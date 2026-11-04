@@ -48,7 +48,7 @@ AirSource X provides two **actual trained LightGBM forecasts** for one ITO Delhi
 ### Not implemented or empirically validated
 - Independent validation of the downloaded dataset's publication/availability time semantics and source reuse terms.
 - Replicated performance across additional Delhi stations and later independent seasons.
-- Public static website deployed at [shylankamesh.github.io/airsource-x](https://shylankamesh.github.io/airsource-x/); the interactive Gradio app remains local-only.
+- Public static website is deployed at [shylankamesh.github.io/airsource-x](https://shylankamesh.github.io/airsource-x/); the interactive Gradio app remains local-only.
 - Real satellite fire ingestion, HYSPLIT trajectories, TROPOMI, MAIAC or actual source apportionment.
 - Source attribution truth labels, human usability study, trained causal source classifier or validated source percentages.
 - True live data deployment or regulatory AQI. Overall AQI cannot be derived from PM2.5 alone.
@@ -102,14 +102,12 @@ SHAP is optional and explains model predictions, not physical sources. To regene
 - [`docs/DEMO_GUIDE.md`](docs/DEMO_GUIDE.md): judges' walkthrough and honest wording.
 
 ## Screenshots / demo
-The screenshot below is a genuine capture of the public static demo homepage. The hero graphic is conceptual and labeled as not measured data. The public demo now uses the corrected project-relative report links, which were verified after deployment. The Gradio forecasting and evidence-engine dashboard runs locally; its evidence scenarios are synthetic. Do not claim the prototype has solved GP-01 empirically.
-
-![AirSource X public demo homepage](assets/screenshots/airsource-x-homepage.jpg)
+The public site presents the current dark navy and mint design, measured retrospective results, and the study's limits. The image formerly embedded here shows an earlier design and is not presented as a screenshot of the current site. Capture and commit a fresh screenshot of the current public demo before final judging. The Gradio forecasting and evidence-engine dashboard runs locally; its evidence scenarios are synthetic. Do not claim the prototype has solved GP-01 empirically.
 
 [Open the live demo](https://shylankamesh.github.io/airsource-x/)
 
 ## AI development tool disclosure (required)
-This project code, documentation, and experimental prototype were generated with assistance from **ChatGPT (OpenAI)**. Human review and verification are required. Add any other tools actually used by the team (for example, GitHub Copilot or Cursor) before submission. AI assistance is not evidence that experiments ran; actual CLI outputs/tests are included.
+This project code, documentation, and experimental prototype were developed with assistance from **ChatGPT and OpenAI Codex**. Human review and verification are required. Add any other tools actually used by the team (for example, GitHub Copilot or Cursor) before submission. AI assistance is not evidence that experiments ran; test and experiment results must be independently reproducible.
 
 ## Limitations and appropriate use
 This is a **research screening prototype**, not a chemical source-apportionment method, official AQI reporting service, health diagnosis, source-accusation engine, or emergency warning authority. No sensor/site-specific scientific causal claim or measured economic/public-health impact is established.
