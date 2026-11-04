@@ -143,8 +143,8 @@ def build_issues(hourly, station='Station'):
              'pm_lag7d_mean':float(hist7.pm25.mean()) if len(hist7)>=168 and hist7.pm25.count()>=126 else np.nan,
              'pm_lag24_std':float(past.pm25.std()),'pm_last_valid':float(past.pm25.dropna().iloc[-1]),
              'month_sin':float(np.sin(2*np.pi*T.month/12)), 'month_cos':float(np.cos(2*np.pi*T.month/12)),
-             'dayofyear_sin':float(np.sin(2*np.pi*T.dayofyear/365.25)),
-             'dayofyear_cos':float(np.cos(2*np.pi*T.dayofyear/365.25)), 'weekday':int(T.dayofweek)}
+             'dayofyear_sin':float(np.sin(2*np.pi*T.day_of_year/365.25)),
+             'dayofyear_cos':float(np.cos(2*np.pi*T.day_of_year/365.25)), 'weekday':int(T.day_of_week)}
         for c in OPTIONAL:
             row[{'pm10':'pm10_lag24_mean','no2':'no2_lag24_mean','ws':'ws_lag24_mean','rh':'rh_lag24_mean'}[c]] = float(past[c].mean()) if c in past and past[c].count()>=18 else np.nan
         rows.append(row)

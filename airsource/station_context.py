@@ -60,6 +60,50 @@ def daily_station_means(frame: pd.DataFrame, minimum_hours: int = 18) -> pd.Data
     )
 
 
+def common_timestamp_matrix(frame: pd.DataFrame) -> pd.DataFrame:
+    """Align station PM2.5 observations by the exact reported timestamp; retain gaps."""
+    return frame.pivot(index="timestamp", columns="station", values="pm25").sort_index()
+
+
+def common_timestamp_summary(frame: pd.DataFrame) -> dict[str, int]:
+    """Count timestamps with all stations and with at least four reporting stations."""
+    matrix = common_timestamp_matrix(frame)
+    reporting = matrix.notna().sum(axis=1)
+    return {
+        "timestamps": int(len(matrix)),
+        "all_station_hours": int(reporting.eq(matrix.shape[1]).sum()),
+        "at_least_four_station_hours": int(reporting.ge(4).sum()),
+    }
+
+
+def coincident_elevation_hours(frame: pd.DataFrame, quantile: float = 0.90,
+                               minimum_stations: int = 4,
+                               minimum_fraction: float = 0.50) -> pd.DataFrame:
+    """Find hours when many stations exceed their own historical percentile.
+
+    This retrospective co-occurrence summary distinguishes multi-station elevation
+    from a single-station relative outlier. Thresholds use the full benchmark period;
+    this is descriptive and is not a forecast-time or causal analysis.
+    """
+    matrix = common_timestamp_matrix(frame)
+    thresholds = matrix.quantile(quantile)
+    reporting = matrix.notna().sum(axis=1)
+    elevated = matrix.gt(thresholds, axis="columns").sum(axis=1)
+    required = np.ceil(reporting * minimum_fraction)
+    keep = reporting.ge(minimum_stations) & elevated.ge(required)
+    result = pd.DataFrame({
+        "timestamp": matrix.index[keep],
+        "stations_reporting": reporting.loc[keep].to_numpy(),
+        "stations_above_own_p90": elevated.loc[keep].to_numpy(),
+        "share_reporting_above_p90": (elevated.loc[keep] / reporting.loc[keep]).round(2).to_numpy(),
+        "network_median_pm25": matrix.loc[keep].median(axis=1).round(2).to_numpy(),
+    })
+    return result.sort_values(
+        ["stations_above_own_p90", "network_median_pm25", "timestamp"],
+        ascending=[False, False, True],
+    ).head(100).reset_index(drop=True)
+
+
 def same_hour_network_outliers(frame: pd.DataFrame, threshold: float = 3.5,
                                minimum_stations: int = 4) -> pd.DataFrame:
     """Screen unusual same-hour station values using a robust network-relative score.
@@ -67,13 +111,17 @@ def same_hour_network_outliers(frame: pd.DataFrame, threshold: float = 3.5,
     A flagged value is only unusual relative to other stations in that hour. This
     is not a validated incident detector and does not identify a pollution source.
     """
-    values = frame.pivot(index="timestamp", columns="station", values="pm25")
+    values = common_timestamp_matrix(frame)
     count = values.count(axis=1)
     median = values.median(axis=1, skipna=True)
     deviations = values.sub(median, axis=0).abs()
     mad = deviations.median(axis=1, skipna=True)
-    denominator = mad.replace(0, np.nan)
-    robust_score = values.sub(median, axis=0).div(denominator, axis=0) * 0.6745
+    scale = mad * 1.4826
+    iqr_scale = (values.quantile(0.75, axis=1) - values.quantile(0.25, axis=1)) / 1.349
+    scale = scale.where(scale > 0, iqr_scale)
+    # One µg/m³ is a conservative numerical floor when peers have identical values.
+    scale = scale.where(scale >= 1.0, 1.0)
+    robust_score = values.sub(median, axis=0).div(scale, axis=0)
     flagged = robust_score.where(count.ge(minimum_stations), axis=0).where(
         robust_score.abs().ge(threshold)
     )

@@ -6,11 +6,14 @@
 **Tagline:** Forecast the pollution. Investigate the evidence. Make uncertainty visible.
 
 ## Team details (required before Devpost submission)
-- Team name: **[ADD YOUR ACTUAL TEAM NAME]**
-- Member 1: **[ADD NAME]**
-- Member 2: **[ADD NAME]**
+- Team name: **[ADD TEAM NAME]**
+- Members: **Shylan Kamesh S**, **Sai Santhosh T**, **Derin Godson**
 - Submission: **[https://github.com/shylankamesh/airsource-x](https://github.com/shylankamesh/airsource-x)**
 - Live demo: **[ADD IF DEPLOYED]**
+
+## Technologies
+
+Python, pandas, NumPy, scikit-learn, LightGBM, Plotly, Gradio, pytest, and a static HTML/CSS/JavaScript website. SHAP is optional; the committed SHAP examples are synthetic model explanations, not source-causality evidence.
 
 ## Delhi CPCB study and website
 
@@ -30,7 +33,7 @@ AirSource X provides two **actual trained LightGBM forecasts** for one ITO Delhi
 - OpenCity/CPCB-style CSV reader with timestamp parsing, basic QC, negative-value masking, source checksum and 15-minute → hourly coverage gate (3 of 4).
 - Forecast target labels requiring 18 of 24 valid PM2.5 hours, independent 0–24h and 24–48h targets, past-only features and 48h temporal split purge.
 - LightGBM, past-day persistence and training-only calendar mean, plus validation-based safe model selection; actual held-out MAE/RMSE/bias and 150 µg/m³ **exploratory** high-PM-event metrics.
-- Approximate split-calibrated interval with held-out empirical coverage (not guaranteed due to temporal dependence).
+- Exploratory split-residual 90% interval; held-out coverage is below nominal and is not calibrated for operational use (71.5% and 74.6%).
 - Separate model files, inputs, predictions, held-out test tables, feature importance and temporal split metadata.
 - Verified SHAP model explanations, exported for synthetic LightGBM test cases (not source causality).
 - Two-station coincident observation comparisons; does not infer origin or perform unsupported interpolation.
@@ -39,6 +42,7 @@ AirSource X provides two **actual trained LightGBM forecasts** for one ITO Delhi
 - Evidence-removal test controls; 36 variations of 12 synthetic rule-policy scenarios and B0/B1/X comparisons. **Not a ground-truth attribution study.**
 - Interactive Gradio dashboard and fully offline, interactive Plotly HTML report.
 - Separate six-station historical Delhi context (June 2018–October 2019): coverage, observed daily means, and a same-hour network-relative outlier screen. It is not blended with the ITO 2024–2026 forecast experiment.
+- The six-station view aligns exact timestamps and reports hours with all six or at least four stations present. It also lists retrospective hours where at least half of reporting stations exceed their own full-period 90th percentile. These are descriptive screens only: station coordinates are absent and no local source, transport path, or causal event is inferred.
 - Automated test suite: run `python -m pytest -q` to reproduce current totals.
 
 ### Not implemented or empirically validated
@@ -98,7 +102,7 @@ SHAP is optional and explains model predictions, not physical sources. To regene
 - [`docs/DEMO_GUIDE.md`](docs/DEMO_GUIDE.md): judges' walkthrough and honest wording.
 
 ## Screenshots / demo
-The responsive website is in `website/index.html`; the Gradio app defaults to the Delhi retrospective results while clearly marking evidence-engine scenarios as synthetic. The hero graphic is conceptual and labeled as not measured data. No browser screenshot or live deployment is included yet. Do not claim the prototype has solved GP-01 empirically.
+The responsive website is in `website/index.html`; the Gradio app defaults to the Delhi retrospective results while clearly marking evidence-engine scenarios as synthetic. The hero graphic is conceptual and labeled as not measured data. No verified public deployment is available yet. Browser inspection was performed locally; repository screenshots are still required before final submission. Do not claim the prototype has solved GP-01 empirically.
 
 ## AI development tool disclosure (required)
 This project code, documentation, and experimental prototype were generated with assistance from **ChatGPT (OpenAI)**. Human review and verification are required. Add any other tools actually used by the team (for example, GitHub Copilot or Cursor) before submission. AI assistance is not evidence that experiments ran; actual CLI outputs/tests are included.

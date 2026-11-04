@@ -1,11 +1,11 @@
 # AirSource X — Hackathon submission brief
 
-## Team details to complete
+## Team details
 
 - Team name: **[ADD TEAM NAME]**
-- Members: **[ADD MEMBER NAMES]**
+- Members: **Shylan Kamesh S**, **Sai Santhosh T**, **Derin Godson**
 - Public repository: **[https://github.com/shylankamesh/airsource-x](https://github.com/shylankamesh/airsource-x)**
-- Hosted demo: **[ADD URL IF DEPLOYED]**
+- Hosted demo: **Not verified; no public interactive demo URL is available.**
 
 ## Short description
 
@@ -20,6 +20,7 @@ AirSource X is an experimental air-quality research prototype that pairs short-h
 - A qualitative evidence-rule prototype with provenance, contradictions, missing evidence, and abstention.
 - A responsive, interactive website presenting the ITO Delhi study and its limitations.
 - A separate historical six-station Delhi view with station coverage, daily observed means, and an exploratory same-hour network-relative outlier screen; it is not used to claim multi-station forecast performance.
+- Exact-time overlap summary and a retrospective co-occurrence screen for stations above their own historical 90th percentile; coordinates are not available, so this is not geographic mapping or causal attribution.
 
 ## Delhi study result
 
@@ -40,6 +41,8 @@ The preceding-24-hour mean is better for 0–24h; raw LightGBM is better for 24�
 
 The nominal 90% intervals achieved 71.5% and 74.6% empirical coverage, so they must be described as exploratory and under-covering. The source file contains 68,985 records through 1 January 2026; hourly PM2.5 coverage after aggregation is 93.257%, with a 148-hour maximum missing streak and one blank footer row excluded from timestamped data. The downloaded CSV and source manifest are included in `data/raw/`; acknowledge CPCB and its contributing agencies.
 
+The separate six-station benchmark contains 70,227 hourly rows spanning June 2018–October 2019. Its six station series have 11,704 timestamps with all six reporting and 11,704 timestamps with at least four reporting. The benchmark's compressed and uncompressed checksums are recorded in `data/benchmarks/manifest.json` and checked by tests. It remains a historical context dataset, not a forecast holdout.
+
 ## Demo narration
 
 1. Open `website/index.html`.
@@ -47,7 +50,8 @@ The nominal 90% intervals achieved 71.5% and 74.6% empirical coverage, so they m
 3. Switch between the two forecast horizons and compare LightGBM with the last observation, preceding-24-hour mean, and seasonal baseline.
 4. Point out the interval under-coverage and the limits section: no live forecast proof, no all-Delhi generalization, and no physical source attribution.
 5. In Gradio, show the separate historical Multi-station Context tab; clarify that it is descriptive 2018–2019 data, not the ITO forecast test or geographic source evidence.
-6. Open `results/delhi_ito_2024_25/EXPERIMENT_RESULTS.md` for the full metrics, split dates, coverage, and policy fixture results.
+6. In Source Investigation Studio, toggle FIRMS to demonstrate a genuine recomputation to insufficient evidence. Explain that the case is synthetic and shows rule behavior only.
+7. Open `results/delhi_ito_2024_25/EXPERIMENT_RESULTS.md` for the full metrics, split dates, coverage, and policy fixture results.
 
 ## Limitations to disclose
 
@@ -60,5 +64,5 @@ The nominal 90% intervals achieved 71.5% and 74.6% empirical coverage, so they m
 
 ## Pre-submission fields still required
 
-Fill the team, member, repository, and hosted demo fields above. Confirm the hackathon’s submission format and deadline. Check data reuse terms before redistributing the raw CSV. Deploy the site and test it in the target demo environment if a live URL is required. Select a project license before inviting reuse.
+The member names and public repository are filled in. The team name remains a placeholder because it was not provided. Confirm the hackathon's submission format, data reuse terms, and project-license choice. A public hosted demo and committed app screenshots are not verified yet.
 
