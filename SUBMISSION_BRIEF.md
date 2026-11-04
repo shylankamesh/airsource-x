@@ -62,8 +62,8 @@ The separate six-station benchmark contains 70,227 hourly rows spanning June 201
 - Overall AQI and health advice are not provided.
 - The run is retrospective and timestamp availability at forecast issue time remains unverified.
 
-## Pre-submission fields still required
+## Pre-submission checks still required
 
-The team name (Fresh_coderz), member names, and public repository are filled in. Confirm the hackathon's submission format, data reuse terms, and project-license choice. The public static website is available and a genuine homepage screenshot is committed in `assets/screenshots/` and embedded in the README.
+The team name (Fresh_coderz), member names, public repository, and live static demo are filled in. The interactive Gradio app is local-only. The image in `assets/screenshots/` is from the previous website design and must be replaced with a current homepage capture before final judging. Confirm team registration, data reuse terms, any additional AI tools used by the team, and the project's license choice before submitting.
 
 
