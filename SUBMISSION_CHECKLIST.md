@@ -15,8 +15,8 @@
 | Team members | PASS | Shylan Kamesh S, Sai Santhosh T, Derin Godson. |
 | Team name | PASS | Confirmed by the team: Fresh_coderz. |
 | Public GitHub source branch | PASS | Submission branch is public; see PR link in the delivery report. `main` is not changed. |
-| Pull request to `main` | PASS | [PR #1](https://github.com/shylankamesh/airsource-x/pull/1) is open and cleanly mergeable; it has not been merged. |
-| GitHub Pages / public demo | FAIL | Workflow run 41708316108 failed at Configure GitHub Pages because no Pages site is enabled/configured. The repository setting must be enabled for GitHub Actions, then deployment rerun and public URL verified. |
+| Pull request to `main` | PASS | [PR #1](https://github.com/shylankamesh/airsource-x/pull/1) is open and cleanly mergeable; it has not been merged. `main` remains unchanged. |
+| GitHub Pages / public demo | PARTIAL | Run 41708316108 now succeeds and the public site opens at `https://shylankamesh.github.io/airsource-x/`. The deployed `main` copy has report links outside the project path; corrected relative links are on this PR branch and need the authorized merge/redeploy. |
 | Committed UI screenshots | NOT VERIFIED | Genuine screenshot files still need to be added under `assets/screenshots/` and embedded in README. |
 | Clean-clone reproducibility | PASS | Fresh public clone of the branch: 32 passed, 0 failed, 0 skipped using the supplied dependency environment. |
 | Hackathon format and deadline requirements | NOT VERIFIED | Confirm submission form/format and team registration details. |
@@ -29,6 +29,6 @@ This is a one-station retrospective forecast experiment plus a separate 2018–2
 ## Before submitting
 
 1. Confirm the team name is spelled **Fresh_coderz** in the hackathon registration.
-2. Add genuine screenshots under `assets/screenshots/`; deploy the static site and verify it before adding a public demo link.
+2. Add genuine screenshots under `assets/screenshots/`. The static site is deployed; after PR #1 is merged and Pages redeploys, verify its corrected report links.
 3. Confirm the hackathon form, data terms, and any requested AI disclosure format.
 4. Review the open PR and submit it to the hackathon; do not merge without authorization.
