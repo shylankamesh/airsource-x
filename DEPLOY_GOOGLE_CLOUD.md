@@ -4,15 +4,22 @@ The Streamlit app is packaged for Cloud Run and reads the platform-provided `POR
 
 ## Deploy from Google Cloud Shell
 
-1. Enable 2-Step Verification on the Google account if Google requires it, then select the trial project in the Cloud Console.
-2. Open [Google Cloud Shell](https://console.cloud.google.com/?cloudshell=true) for that project and clone the V8 source from the public `main` branch:
+1. Select the intended trial project in the Cloud Console and open [Google Cloud Shell](https://console.cloud.google.com/?cloudshell=true).
+2. Get the current public V8 source. For a fresh clone:
 
    ```bash
    git clone https://github.com/shylankamesh/airsource-x.git airsource-x-v8
    cd airsource-x-v8
    ```
 
-3. Deploy the source as a public Cloud Run service (the app contains historical, public research data and no user accounts):
+   If `airsource-x-v8` already exists, update it instead:
+
+   ```bash
+   cd ~/airsource-x-v8
+   git pull origin main
+   ```
+
+3. Confirm the `Dockerfile` is in this directory. It installs `libgomp1`, required by the bundled LightGBM model artifacts. Deploy from this directory so Cloud Run uses that Dockerfile:
 
    ```bash
    gcloud run deploy airsource-x \
@@ -24,11 +31,11 @@ The Streamlit app is packaged for Cloud Run and reads the platform-provided `POR
      --timeout 300
    ```
 
-4. Choose `Y` if prompted to enable required APIs or create an Artifact Registry repository. Copy the service URL printed when deployment finishes.
-5. Open the URL in a private/incognito browser window. Confirm the overview loads, select **Forecast lab**, and confirm the bundled historical model preview appears. Check that the page identifies the data as historical (June 2018–October 2019).
-6. Add the verified URL and screenshots of the running app to the README before submitting.
+4. Choose `Y` if prompted to enable required APIs or create an Artifact Registry repository. Wait for deployment to finish and copy the service URL.
+5. Open the URL in a private/incognito browser window. Confirm the overview loads, select **Forecast lab**, and confirm both bundled historical model horizons appear without an error. Check that the page identifies the data as historical (June 2018–October 2019).
+6. Only after that verification, add the public URL and screenshots of the running app to the README.
 
-Google Cloud Run source deployment builds the project using buildpacks; the included Dockerfile is available for deployments using a container build. Keep the service public only if the team intends judges to access the demo without authentication. Review Cloud Billing after the hackathon and delete the service if it is no longer needed.
+Cloud Run uses the Dockerfile when one is present in the selected source directory; if the build output says it is using buildpacks, stop and check that you are in the repository root and that `Dockerfile` exists there. Keep the service public only if the team intends judges to access the demo without authentication. Review Cloud Billing after the hackathon and delete the service if it is no longer needed.
 
 ## Limits
 
@@ -37,4 +44,5 @@ The public demo is a research prototype. It does not provide current station obs
 ## Official references
 
 - [Deploy a Python Streamlit service to Cloud Run](https://docs.cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-streamlit-service)
+- [Deploy services from source code](https://docs.cloud.google.com/run/docs/deploying-source-code)
 - [Allow public access to a Cloud Run service](https://docs.cloud.google.com/run/docs/authenticating/public)
