@@ -66,4 +66,15 @@ The separate six-station benchmark contains 70,227 hourly rows spanning June 201
 
 The team name (Fresh_coderz), member names, public repository, and live static demo are filled in. The interactive Gradio app is local-only. The image in `assets/screenshots/` is from the previous website design and must be replaced with a current homepage capture before final judging. Confirm team registration, data reuse terms, any additional AI tools used by the team, and the project's license choice before submitting.
 
+## Devpost entry fields
+
+- Project title: **AirSource X**
+- Track / problem: **Green Planet · GP-01: Air Quality Monitoring & Source Attribution**
+- Public repository: **https://github.com/shylankamesh/airsource-x**
+- Live demo: **https://shylankamesh.github.io/airsource-x/**
+- Short description: **A transparent Delhi PM2.5 forecasting research prototype that compares two short horizons with simple baselines and shows what a single-station retrospective test can—and cannot—support.**
+- Team: **Fresh_coderz — Shylan Kamesh S, Sai Santhosh T, Derin Godson**
+- AI tool disclosure: **ChatGPT and OpenAI Codex**; add any additional tools actually used by the team.
+- Required README media: **Replace the stale homepage image with a current screenshot before submission.**
+
 
