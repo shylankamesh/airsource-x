@@ -13,10 +13,10 @@
 | Forecast results and interval caveat | PASS | Results checked against saved metrics; nominal 90% coverage is 71.5% / 74.6%, so intervals are marked exploratory and under-covering. |
 | Website navigation and responsive behavior | PASS | Website includes hash-linked section navigation and responsive CSS; browser review also confirmed the Gradio app's tab navigation at a narrow viewport. |
 | Team members | PASS | Shylan Kamesh S, Sai Santhosh T, Derin Godson. |
-| Team name | NOT VERIFIED | `[ADD TEAM NAME]` remains for the team to fill in. |
+| Team name | PASS | Confirmed by the team: Fresh_coderz. |
 | Public GitHub source branch | PASS | Submission branch is public; see PR link in the delivery report. `main` is not changed. |
 | Pull request to `main` | PASS | [PR #1](https://github.com/shylankamesh/airsource-x/pull/1) is open and cleanly mergeable; it has not been merged. |
-| GitHub Pages / public demo | FAIL | `https://shylankamesh.github.io/airsource-x/` returns HTTP 404. Repository metadata says Pages is not enabled. |
+| GitHub Pages / public demo | FAIL | Workflow run 41708316108 failed at Configure GitHub Pages because no Pages site is enabled/configured. The repository setting must be enabled for GitHub Actions, then deployment rerun and public URL verified. |
 | Committed UI screenshots | NOT VERIFIED | Genuine screenshot files still need to be added under `assets/screenshots/` and embedded in README. |
 | Clean-clone reproducibility | PASS | Fresh public clone of the branch: 32 passed, 0 failed, 0 skipped using the supplied dependency environment. |
 | Hackathon format and deadline requirements | NOT VERIFIED | Confirm submission form/format and team registration details. |
@@ -28,7 +28,7 @@ This is a one-station retrospective forecast experiment plus a separate 2018–2
 
 ## Before submitting
 
-1. Add the actual team name.
+1. Confirm the team name is spelled **Fresh_coderz** in the hackathon registration.
 2. Add genuine screenshots under `assets/screenshots/`; deploy the static site and verify it before adding a public demo link.
 3. Confirm the hackathon form, data terms, and any requested AI disclosure format.
 4. Review the open PR and submit it to the hackathon; do not merge without authorization.
