@@ -64,5 +64,6 @@ The separate six-station benchmark contains 70,227 hourly rows spanning June 201
 
 ## Pre-submission fields still required
 
-The team name (Fresh_coderz), member names, and public repository are filled in. Confirm the hackathon's submission format, data reuse terms, and project-license choice. The public static website is available. Committed app screenshots are not yet verified.
+The team name (Fresh_coderz), member names, and public repository are filled in. Confirm the hackathon's submission format, data reuse terms, and project-license choice. The public static website is available and a genuine homepage screenshot is committed in `assets/screenshots/` and embedded in the README.
+
 

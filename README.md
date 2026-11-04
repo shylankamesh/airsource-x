@@ -102,7 +102,11 @@ SHAP is optional and explains model predictions, not physical sources. To regene
 - [`docs/DEMO_GUIDE.md`](docs/DEMO_GUIDE.md): judges' walkthrough and honest wording.
 
 ## Screenshots / demo
-The responsive website is in `website/index.html`; the Gradio app defaults to the Delhi retrospective results while clearly marking evidence-engine scenarios as synthetic. The hero graphic is conceptual and labeled as not measured data. The public static website is deployed and was opened successfully. The deployed `main` copy still has report links that resolve outside the project path; this submission branch has corrected relative links, which will ship after PR #1 is merged and Pages redeploys. Repository screenshots are still required before final submission. Do not claim the prototype has solved GP-01 empirically.
+The screenshot below is a genuine capture of the public static demo homepage. The hero graphic is conceptual and labeled as not measured data. The deployed `main` copy still has report links that resolve outside the project path; this branch corrects them, and the fix will go live after PR #1 is merged and Pages redeploys. The Gradio forecasting and evidence-engine dashboard runs locally; its evidence scenarios are synthetic. Do not claim the prototype has solved GP-01 empirically.
+
+![AirSource X public demo homepage](assets/screenshots/airsource-x-homepage.jpg)
+
+[Open the live demo](https://shylankamesh.github.io/airsource-x/)
 
 ## AI development tool disclosure (required)
 This project code, documentation, and experimental prototype were generated with assistance from **ChatGPT (OpenAI)**. Human review and verification are required. Add any other tools actually used by the team (for example, GitHub Copilot or Cursor) before submission. AI assistance is not evidence that experiments ran; actual CLI outputs/tests are included.
@@ -112,6 +116,7 @@ This is a **research screening prototype**, not a chemical source-apportionment 
 
 ## License
 No license chosen yet. All rights reserved until the team selects a license; third-party datasets have their own terms.
+
 
 
 
