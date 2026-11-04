@@ -6,7 +6,7 @@
 **Tagline:** Forecast the pollution. Investigate the evidence. Make uncertainty visible.
 
 ## Team details (required before Devpost submission)
-- Team name: **[ADD TEAM NAME]**
+- Team name: **Fresh_coderz**
 - Members: **Shylan Kamesh S**, **Sai Santhosh T**, **Derin Godson**
 - Submission: **[https://github.com/shylankamesh/airsource-x](https://github.com/shylankamesh/airsource-x)**
 - Live demo: **[ADD IF DEPLOYED]**
