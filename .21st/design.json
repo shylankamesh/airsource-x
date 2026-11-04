@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "project": {
+    "name": "AirSource X",
+    "productType": "judge-facing retrospective air-quality research demo",
+    "stack": ["static HTML", "CSS", "JavaScript"]
+  },
+  "sources": {
+    "tokens": ["website/styles.css"],
+    "components": ["website/index.html"],
+    "assets": [
+      "assets"
+    ],
+    "instructions": []
+  },
+  "design": {
+    "colorMode": "dark",
+    "colors": {
+      "background": "#050912",
+      "surface": "#0a1120",
+      "panel": "#0b1423",
+      "text": "#f1f5f9",
+      "secondary": "#a5b3c6",
+      "mint": "#6af0b7",
+      "blue": "#8ab6ff",
+      "amber": "#f1b976"
+    },
+    "typography": {"display": "Inter", "body": "Inter", "label": "DM Mono"},
+    "spacing": {"desktopGutter": "32px", "mobileGutter": "18px", "contentMax": "1180px"},
+    "radius": {"control": "7px", "panel": "12px", "featurePanel": "17px"},
+    "shadows": {"elevation": "neutral black offset blur"},
+    "motion": {"scroll": "smooth with reduced-motion fallback", "dataTransition": "bar width transition"},
+    "density": "spacious editorial with compact chart labels"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": ["Use actual Delhi experiment values", "Keep limitations visible", "Support keyboard tabs and reduced motion"],
+    "avoid": ["Fictional customer marks", "Unsupported live or citywide claims", "Conceptual globe presented as measured pollution data"]
+  },
+  "decisions": ["Adapt the supplied deep-space/navy and mint reference for a data-first AirSource X research demo."],
+  "evidence": ["PRODUCT.md", "DESIGN.md", "website/index.html", "website/styles.css"],
+  "generatedAt": "2026-11-04T11:10:00.000Z"
+}

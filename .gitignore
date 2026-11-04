@@ -1,4 +1,6 @@
 .venv/
+.impeccable-cache/
+work/
 __pycache__/
 .pytest_cache/
 *.pyc

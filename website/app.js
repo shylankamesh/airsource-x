@@ -11,7 +11,7 @@ function renderHorizon(index){
   title.textContent=horizon.title;
   winner.textContent=horizon.winner;
   chart.replaceChildren(...horizon.rows.map(([name,value,type])=>{
-    const row=document.createElement('div'); row.className='bar-row';
+    const row=document.createElement('div'); row.className='bar-row'; row.setAttribute('role','listitem');
     const label=document.createElement('span'); label.className='bar-name'; label.textContent=name;
     const track=document.createElement('div'); track.className='bar-track'; track.setAttribute('aria-hidden','true');
     const fill=document.createElement('div'); fill.className=`bar-fill ${type}`; fill.style.width=`${Math.min(value/45*100,100)}%`; track.append(fill);

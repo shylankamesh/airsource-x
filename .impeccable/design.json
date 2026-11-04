@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "world": "The Orbital Evidence Desk",
+  "source": "DESIGN.md",
+  "tokens": {
+    "color": {
+      "background": "#050912",
+      "surface-raised": "#0a1120",
+      "surface-panel": "#0b1423",
+      "foreground": "#f1f5f9",
+      "secondary-copy": "#a5b3c6",
+      "accent-mint": "#6af0b7",
+      "accent-blue": "#8ab6ff",
+      "uncertainty-amber": "#f1b976",
+      "hairline": "rgba(153,177,211,.16)"
+    },
+    "font": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "DM Mono"
+    },
+    "radius": {
+      "control": "7px",
+      "panel": "12px",
+      "feature-panel": "17px"
+    },
+    "layout": {
+      "content-max": "1180px",
+      "desktop-gutter": "32px",
+      "mobile-gutter": "18px"
+    }
+  },
+  "constraints": [
+    "Use only measured experiment values in data displays.",
+    "Keep one-station retrospective scope and under-coverage visible.",
+    "Conceptual orbital artwork must not read as a pollution map.",
+    "Preserve reduced-motion support and keyboard-operable forecast tabs."
+  ]
+}
