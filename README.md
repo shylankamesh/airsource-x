@@ -102,7 +102,7 @@ SHAP is optional and explains model predictions, not physical sources. To regene
 - [`docs/DEMO_GUIDE.md`](docs/DEMO_GUIDE.md): judges' walkthrough and honest wording.
 
 ## Screenshots / demo
-The screenshot below is a genuine capture of the public static demo homepage. The hero graphic is conceptual and labeled as not measured data. The deployed `main` copy still has report links that resolve outside the project path; this branch corrects them, and the fix will go live after PR #1 is merged and Pages redeploys. The Gradio forecasting and evidence-engine dashboard runs locally; its evidence scenarios are synthetic. Do not claim the prototype has solved GP-01 empirically.
+The screenshot below is a genuine capture of the public static demo homepage. The hero graphic is conceptual and labeled as not measured data. The public demo now uses the corrected project-relative report links, which were verified after deployment. The Gradio forecasting and evidence-engine dashboard runs locally; its evidence scenarios are synthetic. Do not claim the prototype has solved GP-01 empirically.
 
 ![AirSource X public demo homepage](assets/screenshots/airsource-x-homepage.jpg)
 
