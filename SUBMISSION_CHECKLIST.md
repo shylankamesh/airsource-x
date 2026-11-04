@@ -5,7 +5,7 @@
 | Requirement | Status | Evidence / remaining action |
 |---|---|---|
 | Latest integration on `main` | PASS | PR #1 merged on 4 November 2026 as `23bcb2546073ab0ea9a3dddac0e9c86a6a7baf85`. |
-| Automated tests | PASS | 32 passed, 0 failed, 0 skipped with the supplied dependency environment and workspace temp directory. |
+| Automated tests | PRIOR PASS | The previous clean-clone audit recorded 32 passed, 0 failed, 0 skipped. This checkout's current Python environment lacks pandas, so I could not reproduce the run here. |
 | App startup and forecast results | PASS | Gradio app started on localhost; dashboard showed held-out result rows for both horizons. |
 | Six-station provenance, exact-time overlap, coverage, and comparative trends | PASS | Six labeled stations; 11,704 common all-station hours and 11,704 hours with at least four reporting; dataset hash checked by automated test. |
 | Same-hour anomaly and coincident elevation screens | PASS | Displayed as retrospective descriptive screens with explicit caveats; station coordinates are not supplied. |
@@ -16,9 +16,9 @@
 | Team name | PASS | Confirmed by the team: Fresh_coderz. |
 | Public GitHub source | PASS | Repository default branch `main` contains the integrated submission. |
 | Pull request to `main` | PASS | [PR #1](https://github.com/shylankamesh/airsource-x/pull/1) was merged on 4 November 2026. |
-| GitHub Pages / public demo | PASS | Latest deployment run 41814656372 succeeded. The public site opens at `https://shylankamesh.github.io/airsource-x/`; report links resolve under the project path and the Gradio setup link points to `main`. |
-| Committed UI screenshots | PASS | Genuine capture of the public static demo homepage is in `assets/screenshots/airsource-x-homepage.jpg` and embedded in README. |
-| Clean-clone reproducibility | PASS | Fresh public clone of the branch: 32 passed, 0 failed, 0 skipped using the supplied dependency environment. |
+| GitHub Pages / public demo | PASS | Deployment run 41814656372 succeeded. I opened the public site and verified its project-relative report links and Gradio setup link. |
+| Current UI screenshot in README | NEEDS UPDATE | The committed `assets/screenshots/airsource-x-homepage.jpg` shows the previous website design; README no longer embeds it as current evidence. Capture a fresh screenshot before final judging. |
+| Clean-clone reproducibility | PRIOR PASS | The prior audit recorded 32 passed, 0 failed, 0 skipped. I could not rerun it here because dependencies, including pandas, are not installed. |
 | Hackathon format and deadline requirements | NOT VERIFIED | Confirm submission form/format and team registration details. |
 | License choice | NOT VERIFIED | No project license selected; third-party dataset terms are documented. |
 
@@ -29,7 +29,7 @@ This is a one-station retrospective forecast experiment plus a separate 2018–2
 ## Before submitting
 
 1. Confirm the team name is spelled **Fresh_coderz** in the hackathon registration.
-2. Genuine homepage screenshot is committed and embedded; live report links were verified after deployment.
+2. Capture the current dark-theme public homepage and replace `assets/screenshots/airsource-x-homepage.jpg`; then embed the updated image in README.
 3. Confirm the hackathon form, data terms, and any requested AI disclosure format.
 4. Complete the team registration check, then submit the project through the hackathon portal before its deadline.
 
