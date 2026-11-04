@@ -115,4 +115,4 @@ These cases test rule-policy consistency, NOT ground-truth source fractions or s
 - FIRMS, HYSPLIT, TROPOMI, and MAIAC are not fetched; they are explicitly unavailable, not zero.
 - Source hypotheses are policy-screening, not physical source contributions.
 - Spatial comparison is only coincident-station correlation, not causal origin or spatial interpolation.
-- The local environment could not install Streamlit; install requirements on a connected machine to run app.py.
+- The interactive interface is Gradio; it reads the configured result directory and does not claim live operational forecasts.

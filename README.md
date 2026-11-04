@@ -38,7 +38,7 @@ AirSource X provides two **actual trained LightGBM forecasts**, two simple indep
 - Heuristic next-best-measurement guidance: missing FIRMS / transport / particulate evidence suggests specific checks and limitations.
 - Evidence-removal test controls; 36 variations of 12 synthetic rule-policy scenarios and B0/B1/X comparisons. **Not a ground-truth attribution study.**
 - Interactive Gradio dashboard and fully offline, interactive Plotly HTML report.
-- Automated test suite: run `pytest -q` to reproduce current totals.
+- Automated test suite: run `python -m pytest -q` to reproduce current totals.
 
 ### Not implemented or empirically validated
 - Independent validation of the downloaded dataset's publication/availability time semantics and source reuse terms.
@@ -55,7 +55,6 @@ py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 python -m scripts.run --synthetic
-python -m scripts.explain_models
 python app.py
 ```
 On macOS/Linux:
@@ -64,7 +63,6 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 python -m scripts.run --synthetic
-python -m scripts.explain_models
 python app.py
 ```
 Open **http://127.0.0.1:7860/**. The Gradio app loads the ITO retrospective run by default. `website/index.html` is the judge-facing static presentation. To inspect synthetic software fixtures, set `AIRSOURCE_RESULTS_DIR=results` before launching the app.
@@ -72,10 +70,10 @@ Open **http://127.0.0.1:7860/**. The Gradio app loads the ITO retrospective run 
 ## Run real Delhi station experiments
 1. Use the bundled [ITO Delhi CPCB resource](https://data.opencity.in/dataset/delhi-hourly-air-quality-reports/resource/890f786d-fb9f-475e-8516-191bfa1b01ea), or obtain another station dataset and audit its station ID, timezone, units, coverage, and reuse terms.
 2. Put any replacement CSV into `data/raw/`.
-4. Run:
+3. Run:
 ```bash
 python -m scripts.run --csv data/raw/ito_delhi_2024_25.csv --name "ITO Delhi CPCB" --outdir results/delhi_ito_2024_25
-pytest -q
+python -m pytest -q
 python app.py
 ```
 To compare two stations, add a second `--csv ... --name ...` pair. **Confirm station IDs, date coverage, timestamp timezone, publication delay and co-pollutant units** before publishing quantitative results. The loader assumes unlabelled timestamps are IST; this needs independent verification. DO NOT claim the observational records were issued at time T if the sensor publication/availability delay is unknown. See `docs/METHODOLOGY.md`.
@@ -88,6 +86,8 @@ The bundled ITO resource metadata lists the data license as Public Domain. CPCB 
 
 Outputs include `forecast_metrics.csv`, `forecast_predictions.csv`, `event_metrics.csv`, `interval_metrics.csv`, `station_overlap.csv`, `station_coverage_report.csv`, `data_audit.json`, `policy_case_results.csv`, `policy_comparison.csv`, `policy_case_trace.json`, model artifacts, and interactive `EXPERIMENT_DASHBOARD.html`.
 
+SHAP is optional and explains model predictions, not physical sources. To regenerate SHAP tables, install `shap>=0.47,<0.60` and run `python -m scripts.explain_models` after a completed experiment.
+
 ## Research documentation
 - [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md): forecast target, leakage prevention, synthetic data protocol, evidence screening rules.
 - [`docs/EXPERIMENT_PROTOCOL.md`](docs/EXPERIMENT_PROTOCOL.md): experiments, controls, denominators, reproducible commands.
@@ -95,10 +95,10 @@ Outputs include `forecast_metrics.csv`, `forecast_predictions.csv`, `event_metri
 - [`docs/DEMO_GUIDE.md`](docs/DEMO_GUIDE.md): judges' walkthrough and honest wording.
 
 ## Screenshots / demo
-The responsive website is in `website/index.html`; the Gradio app defaults to the Delhi retrospective results while clearly marking evidence-engine scenarios as synthetic. No live deployment or screenshots are included. Do not claim the prototype has solved GP-01 empirically.
+The responsive website is in `website/index.html`; the Gradio app defaults to the Delhi retrospective results while clearly marking evidence-engine scenarios as synthetic. The hero graphic is conceptual and labeled as not measured data. No browser screenshot or live deployment is included yet. Do not claim the prototype has solved GP-01 empirically.
 
 ## AI development tool disclosure (required)
-This project code, documentation, and experimental prototype were generated with assistance from **ChatGPT (OpenAI)**. Human review and verification are required. Add any other tools actually used by the team (GitHub Copilot, Codex, Cursor, etc.) before submission. AI assistance is not evidence that experiments ran; actual CLI outputs/tests are included.
+This project code, documentation, and experimental prototype were generated with assistance from **ChatGPT (OpenAI)**. Human review and verification are required. Add any other tools actually used by the team (for example, GitHub Copilot or Cursor) before submission. AI assistance is not evidence that experiments ran; actual CLI outputs/tests are included.
 
 ## Limitations and appropriate use
 This is a **research screening prototype**, not a chemical source-apportionment method, official AQI reporting service, health diagnosis, source-accusation engine, or emergency warning authority. No sensor/site-specific scientific causal claim or measured economic/public-health impact is established.
