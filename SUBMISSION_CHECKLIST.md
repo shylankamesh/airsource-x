@@ -19,7 +19,8 @@
 | GitHub Pages / public demo | PASS | Deployment run 41814656372 succeeded. I opened the public site and verified its project-relative report links and Gradio setup link. |
 | Current UI screenshot in README | NEEDS UPDATE | The committed `assets/screenshots/airsource-x-homepage.jpg` shows the previous website design; README no longer embeds it as current evidence. Capture a fresh screenshot before final judging. |
 | Clean-clone reproducibility | PRIOR PASS | The prior audit recorded 32 passed, 0 failed, 0 skipped. I could not rerun it here because dependencies, including pandas, are not installed. |
-| Hackathon format and deadline requirements | NOT VERIFIED | Confirm submission form/format and team registration details. |
+| Official submission requirements and deadline | VERIFIED | Devpost requires a public repository, complete README, screenshot/GIF in the README, model metrics where applicable, and AI-tool disclosure. Deadline: 4 November 2026, 8:00 PM IST. |
+| Devpost entry submitted | NOT DONE | Team must verify registration, complete the project entry, and submit it through the portal before the deadline. |
 | License choice | NOT VERIFIED | No project license selected; third-party dataset terms are documented. |
 
 ## Submission scope
@@ -28,7 +29,7 @@ This is a one-station retrospective forecast experiment plus a separate 2018–2
 
 ## Before submitting
 
-1. Confirm the team name is spelled **Fresh_coderz** in the hackathon registration.
+1. Confirm the team name is spelled **Fresh_coderz** in the hackathon registration and verify all team members are registered and eligible.
 2. Capture the current dark-theme public homepage and replace `assets/screenshots/airsource-x-homepage.jpg`; then embed the updated image in README.
 3. Confirm the hackathon form, data terms, and any requested AI disclosure format.
 4. Complete the team registration check, then submit the project through the hackathon portal before its deadline.
