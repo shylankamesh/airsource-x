@@ -547,7 +547,7 @@ elif page == "Spatial intelligence":
                         snap_fig = px.bar(snapshot.sort_values("pm25"),x="pm25",y="station",orientation="h",
                             labels={"pm25":"PM₂.₅ (µg/m³)","station":"Station"},
                             title="PM₂.₅ at the latest common timestamp",template="plotly_dark")
-                        snap_fig.update_layout(paper_bgcolor="rgba(0,0,0",plot_bgcolor="rgba(0,0,0,0)",margin=dict(l=8,r=8,t=52,b=8))
+                        snap_fig.update_layout(paper_bgcolor="rgba(0,0,0,0)",plot_bgcolor="rgba(0,0,0,0)",margin=dict(l=8,r=8,t=52,b=8))
                         st.plotly_chart(snap_fig,use_container_width=True,config={"displayModeBar":False})
                         st.dataframe(snapshot[["station","station_name","timestamp","pm25"]],use_container_width=True,hide_index=True)
                     else:
