@@ -15,10 +15,10 @@
 | Team members | PASS | Shylan Kamesh S, Sai Santhosh T, Derin Godson. |
 | Team name | NOT VERIFIED | `[ADD TEAM NAME]` remains for the team to fill in. |
 | Public GitHub source branch | PASS | Submission branch is public; see PR link in the delivery report. `main` is not changed. |
-| Pull request to `main` | NOT VERIFIED | Create after the final verified commit; leave open and do not merge. |
-| GitHub Pages / public demo | NOT VERIFIED | No deployment claim until the public URL responds and is usable. |
+| Pull request to `main` | PASS | [PR #1](https://github.com/shylankamesh/airsource-x/pull/1) is open and cleanly mergeable; it has not been merged. |
+| GitHub Pages / public demo | FAIL | `https://shylankamesh.github.io/airsource-x/` returns HTTP 404. Repository metadata says Pages is not enabled. |
 | Committed UI screenshots | NOT VERIFIED | Genuine screenshot files still need to be added under `assets/screenshots/` and embedded in README. |
-| Clean-clone reproducibility | NOT VERIFIED | Must rerun after the final commit is pushed. |
+| Clean-clone reproducibility | PASS | Fresh public clone of the branch: 32 passed, 0 failed, 0 skipped using the supplied dependency environment. |
 | Hackathon format and deadline requirements | NOT VERIFIED | Confirm submission form/format and team registration details. |
 | License choice | NOT VERIFIED | No project license selected; third-party dataset terms are documented. |
 
@@ -29,6 +29,6 @@ This is a one-station retrospective forecast experiment plus a separate 2018–2
 ## Before submitting
 
 1. Add the actual team name.
-2. Add verified screenshots and link a public demo only after deployment and live verification.
+2. Add genuine screenshots under `assets/screenshots/`; deploy the static site and verify it before adding a public demo link.
 3. Confirm the hackathon form, data terms, and any requested AI disclosure format.
 4. Review the open PR and submit it to the hackathon; do not merge without authorization.
