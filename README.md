@@ -135,11 +135,11 @@ Values are macro averages across the six stations, calculated from the committed
 | Evidence screening and family ablation | Implemented as preliminary heuristics; not validated against source ground truth |
 | Local SHAP explanations | Implemented on demand; not independently benchmarked |
 | Satellite / FIRMS, trajectories, drift monitoring | Planned |
-| Live deployment and screenshots | Complete only after publishing a verified public demo and capturing the running app |
+| Live deployment and screenshots | Pending: deploy the app publicly, verify its URL, and add a screenshot of the running app |
 
 ## Screenshots and demo
 
-Before submitting, publish this V8 code to the team's public source repository and add at least one screenshot captured from the running app with the bundled historical dataset selected. Do not use mock values as observations. Add the public Cloud Run URL to the submission table above only after opening it in a signed-out browser and confirming that the app loads.
+Before submitting, add at least one screenshot captured from the running app with the bundled historical dataset selected. Do not use mock values as observations. Add the public Cloud Run URL to the submission table above only after opening it in a signed-out browser and confirming that the app loads. V8 source is published in this repository's main branch.
 
 A short guided walkthrough is in [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md).
 
@@ -164,9 +164,9 @@ ChatGPT and OpenAI Codex were used for project ideation, repository research, im
 
 This repository does not yet include a license. Add one only after the team agrees on the intended reuse terms.
 
-## V3 development workspace status
+## Earlier V3 engineering increments
 
-This ZIP-derived workspace is a separate development copy; the original GitHub repository is not modified.
+This repository retains a record of engineering increments introduced during V3; those increments are part of the current published source.
 
 The first V3 engineering increment adds:
 - Non-destructive observation quality diagnostics (`airsource.quality`).
