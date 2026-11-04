@@ -14,8 +14,8 @@ AirSource X is a Delhi-first environmental intelligence prototype for PM₂.₅ 
 | Team name | **Fresh_coderz** |
 | Team members | Shylan Kamesh S, Sai Santhosh T, Derin Godson |
 | Public source repository | [github.com/shylankamesh/airsource-x](https://github.com/shylankamesh/airsource-x) · Streamlit V8 source on `main` |
-| Live demo | Deployment pending; add the verified Cloud Run URL here before submission |
-| Demo screenshots / GIF | Add screenshots captured from the running build before submission |
+| Live demo | [Open the public Cloud Run demo](https://airsource-x-605775397403.asia-south1.run.app/) · Forecast Lab preview verified |
+| Demo screenshots / GIF | [Forecast Lab live capture](assets/screenshots/cloud-run-forecast.jpg) |
 | Submission deadline | 4 November 2026, 8:00 PM IST |
 
 ## The problem
@@ -135,11 +135,11 @@ Values are macro averages across the six stations, calculated from the committed
 | Evidence screening and family ablation | Implemented as preliminary heuristics; not validated against source ground truth |
 | Local SHAP explanations | Implemented on demand; not independently benchmarked |
 | Satellite / FIRMS, trajectories, drift monitoring | Planned |
-| Live deployment and screenshots | Pending: deploy the app publicly, verify its URL, and add a screenshot of the running app |
+| Live deployment and screenshots | Verified: public Cloud Run URL loads and bundled historical forecast preview renders; screenshot included below |
 
 ## Screenshots and demo
 
-Before submitting, add at least one screenshot captured from the running app with the bundled historical dataset selected. Do not use mock values as observations. Add the public Cloud Run URL to the submission table above only after opening it in a signed-out browser and confirming that the app loads. V8 source is published in this repository's main branch.
+![AirSource X Forecast Lab on the public Cloud Run demo, showing its two bundled historical model horizons and uncertainty intervals.](assets/screenshots/cloud-run-forecast.jpg)\n\nCaptured from the public Cloud Run app on 4 November 2026. The displayed model issue time is 1 October 2019, 16:00 IST, and the bundled data covers June 2018–October 2019. These are retrospective research results, not current-air forecasts. The deployed V8 source is published in this repository's `main` branch.
 
 A short guided walkthrough is in [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md).
 
